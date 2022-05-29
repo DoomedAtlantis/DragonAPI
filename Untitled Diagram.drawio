@@ -1,1 +1,771 @@
-<mxfile host="app.diagrams.net" modified="2022-05-29T01:14:37.082Z" agent="5.0 (Windows)" etag="Ei68zZ9aC7i3h61tC4zB" version="18.1.3" type="github"><diagram id="YqlcEWgoI7olVTExWrvE" name="Page-1">7Z1dc5s4FIZ/jWd2L8zwbXwZ22mbbjzpJN3ddu8UUEAtRl4hJ3Z/fQUIsHGSOi1FnAy+SNDhw+JI5+EgXuGRNV9t3zK0jpY0wPHI1IPtyFqMTNPypqb4l1l2hcX09GlhCRkJCptRG27INyyNurRuSIDTgw05pTEn60OjT5ME+/zAhhijD4eb3dH48FvXKMRHhhsfxcfWf0nAo8LqOXptf4dJGJXfbOhyzQqVG0tDGqGAPuyZrPORNWeU8mJptZ3jOPNe6ZdivzdPrK0qxnDCT9kh3V3cfQ0vL7m7MP5aLT9/5PNvY3mUexRv5AkvGAppcvbhQjSm9gXdI1l7vitdwugmCXB2VH1kzR4iwvHNGvnZ2gfRC4Qt4qtYlAyxKI+PGcfbJytuVO4QHQnTFeZsJzapepH04K7ycVF+qBvEKL0c7TWGK21I9oGwOnTtJrEgPfUCr02OfIID0WtkkTIeUeFDFJ/X1tmh1+ptLildS199wZzvZAigDaeHnsRbwj/tLX/ODqWZjiwutvLQeWFXFhJxvp/2C/u7ZeV6v7xU7nhHEz6nMWX5+Vl6/qnaMzvd51tTeIdumI+f8aItwxmxEPMf9dHj3sFwjDi5P6xH601tHwXIyHRjUd3ZmuGDPuD+v8lCOffc+A6tSCx8eTbKOqaLVllYyA3eYz5jiCSpWLekCW2uH5nzjB9iTVqE1SwHlzhqmveN7JhTzVsX27rVXm4o/+fVE/smj9bvFvlfw7w3jv2igbMDsvD2D9Nxiu/eX/jz0W+5xuQr0ipW1EtzmrmlqIJweFGLw5oJc+670qoYLxU6JF7GzkQ1Xyz9yCsDYF4OGA8CYLwBMC8CzEVCOCzAjA27dxmMZRy5ZSDMywkzhUCY6UCY0wlzteaEZucFiTAVT8q7bEc5X8yBLy3wpWzXfgOmrCUcwjRj/2yzJTFBbKd9ZIItmKXanK5WKAnQbYz/XgeI43mEszVAEGCZyhFgDQhoAwEmCASYrxABSxq8ITH+RyyLnABY/E+Vx789xH8b8W+BiH8LWvyrucmYoRRrB49YLikKPjB6J0DDikIktoF9/2G7yuHjDPBpAz4gntEY4B7SNLFwvvVxPvCgXSQpR3HmNZpUViBh71jKw94FE/ZPRe9P46DNsHc6Cnu56wdKRBWrfmXrjVzWa/SXol5yr0aXqarxCzxxXhNPxFmQYLYhcQCNJ66unCeD0qMVnrgg0gj39YT9e8T+I2twAa9eeeENAd9GwE9ABPzk9QT8kqQpScKzmyW0oJ/YyoN+OgR9G0EPQm9lDIKrn0PLAq+x6PGJv3uMMABHKT3lKqySfAN4fg08IGRYkx419uTUxpZblu1tAGpsW+lVZhDdvfAqc41DknL25MA3gAuMdXh9GdvKNTj2IPNtgzllm/X7AlPWcmDOqcyRyh6R4K4Q9yOg2GnmtVPl6l/bHLDTBnbKCc/9xs7xHOKeY+flQNAysc4zlOgzDgxdfRoySIFb4YEJggcmNB6oSkPE3U4uMpbUgZ111G++UIcZOA/v+qz+MbtSHJ+m/jFMu9FhfrP8xxy0zCcB7OJKy03ZHIlrjALMtHcojT7u1sDly3WPU4cyOMKjXqOsK/3yiSizjI5RBl4ZneuhE06yeZgZcUS6dEnDEMw8rLrJ1bEEjryh1yxRK4o+fguaZ2u26TkTo/jrdksWcBrpviRJwHMjQ7lG04Yzt6vXPOtKlP1EbtTkmW3qmr73cTrl2aRHT0p/oM7oYqTR/S1tbjZgMna6zofBSfzVXLUuyS1DjOBUe4/uUXEFy5YK+w7WJawpy7DUPx8dpim2QqmuZhk8TjPHat7q6R3TDNz8BdU0y9dIpdnuHY7X4NNx9e95seG856XXMOtq9sQTwwtuo2M51lSb7n06TsfN/nSqHqTj3itNx4e5OD+djl/d3m1SP5dLQ7yQNZNy01N9HXPgDCv1WaTkgBAtlrUcyHMqeZaIRzc+KeCzQBxDpM5R+uwq10a6A3Zawc6po9lKp4U54MYfn50WvElx39XQ48Z9zXiifPTPhaPt6XXEg5gIWtYSbsRfXGkLwrDPr3HRJkuUoP4KcMbVjx+UEa/+rUIuHGFynyO+bJ9+R3xZS8ARv6+5O78X7aTNY5L9e4tW+A1JSBrhIHtXMUnCfH1vWeA1R7h+IwtEsf41z2KIrP5RVOv8Ow==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-05-29T02:07:20.872Z" agent="5.0 (Windows)" etag="fgEgdCt3-a8_Y2qU-EBp" version="18.1.3" type="github">
+  <diagram id="YqlcEWgoI7olVTExWrvE" name="Page-1">
+    <mxGraphModel dx="8453" dy="3789" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-1" value="DragonAPIMod.java" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="380" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-4" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-4" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.DragonAPICore&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="-570" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-8" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-186" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="syIfkgLLt6D1KmMYTtCz-8" target="pLcwTUkZ-vxHyysyYa27-86">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-8" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.DragonAPIInit&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-1480" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-9" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-9" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.DragonOptions&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="250" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-10" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-10" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.CommandableUpdateChecker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-12" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-12" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.ModFileVersionChecker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-13" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-13" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.Base.DragonAPIMod.LoadProfiler.LoadPhase&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-14" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-14" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Exception.InstallationException&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;fontColor=#000000;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="syIfkgLLt6D1KmMYTtCz-15" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-15" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Exception.InvalidBuildException&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="600" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-16" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-16" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Exception.JarZipException&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-17" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-17" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Exception.MissingASMException&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="740" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-18" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-18" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.Exception.MissingDependencyException&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="810" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-19" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-19" target="syIfkgLLt6D1KmMYTtCz-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-19" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.Exception.RegistrationException&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="30" y="-420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-20" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-20" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.Exception.VersionMismatchException&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="950" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-21" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-21" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Exception.VersionMismatchException.APIMismatchException&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="1020" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-22" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-22" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.Extras.ModVersion&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="1100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;fontColor=#000000;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="syIfkgLLt6D1KmMYTtCz-23" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="1240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-23" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.IO.ReikaFileReader.HashType&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="1240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;fontColor=#000000;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="syIfkgLLt6D1KmMYTtCz-24" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="1310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-24" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Instantiable.IO.ModLogger&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="1310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;fontColor=#000000;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="syIfkgLLt6D1KmMYTtCz-25" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="1184.4285714285716" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-25" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.IO.ReikaFileReader&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="1170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;fontColor=#000000;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="syIfkgLLt6D1KmMYTtCz-26" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="1420.0000000000005" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-26" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="-510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-26" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.Libraries.Java.ReikaJavaLibrary&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="30" y="-350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;fontColor=#000000;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="syIfkgLLt6D1KmMYTtCz-27" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="1300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-27" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.Libraries.ReikaRegistryHelper&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="1390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;fontColor=#000000;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="syIfkgLLt6D1KmMYTtCz-28" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="1539.9999999999995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-28" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="-510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-28" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.Libraries.Java.ReikaObfuscationHelper&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="30" y="-280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-51" target="syIfkgLLt6D1KmMYTtCz-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-51" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Reika.DragonAPI.Libraries.MathSci.ReikaDateHelper&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="1620" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-56" target="syIfkgLLt6D1KmMYTtCz-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-56" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Exception.MisuseException&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-60" y="-750" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-59" target="syIfkgLLt6D1KmMYTtCz-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-59" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.IO.DirectResourceManager&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-250" y="-670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="syIfkgLLt6D1KmMYTtCz-60" target="syIfkgLLt6D1KmMYTtCz-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="syIfkgLLt6D1KmMYTtCz-60" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Instantiable.Event.Client.GameFinishedLoadingEvent&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-280" y="-570" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-1" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-1" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.ProgressiveRecursiveBreaker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1300" y="-1330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-2" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-2" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.NEI_DragonAPI_Config&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1150" y="-1270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-3" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-3" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.ModularLogger.ModularLoggerCommand&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-960" y="-1210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-4" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-4" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.LoggingFilters.LoggerType&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1730" y="-1670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-5" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-5" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.LoggingFilters&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1590" y="-1610" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-6" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-6" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.DynamicRetrogenSettings&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1450" y="-1550" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-7" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-7" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.DragonAPIEventWatcher&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1310" y="-1490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-8" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-8" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.ChunkManager&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1170" y="-1430" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-9" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-9" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ASM.DragonAPIClassTransformer&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-900" y="-1310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-10" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-10" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.DragonAPICore.DragonAPILoadWatcher&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1030" y="-1370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-11" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-12" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-12" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.FurnaceFuelRegistry&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1335" y="-1210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-13" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-13" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.EnvironmentSanityChecker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1140" y="-1150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-14" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-14" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.CrashNotifications&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-920" y="-1110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-15" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-15" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.CompatibilityTracker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2100" y="-1540" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-16" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-16" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.CommandableUpdateChecker.CheckerDisableCommand&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2000" y="-1660" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-17" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-17" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.CommandableUpdateChecker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1850" y="-1590" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-18" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-18" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.ChunkPregenerator&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1680" y="-1520" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;startArrow=none;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-11" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-19" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.RebootScheduler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1550" y="-1460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-20" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-20" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.RainTicker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1420" y="-1400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-174" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-21" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-21" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.TickScheduler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-780" y="-1030" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-175" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-22" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-22" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.TickRegistry&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-630" y="-740" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-176" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-23" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-23" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.SuggestedModsTracker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-710" y="-660" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-177" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-24" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-24" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.RemoteAssetLoader&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="-570" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-178" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-25" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-25" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.PlayerHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-880" y="-390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-179" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-26" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-26" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.PlayerChunkTracker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-610" y="-250" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-210" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-27" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-27" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.PatreonController&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-690" y="580" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-181" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-28" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-28" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.PackModificationTracker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1380" y="-410" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-182" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-29" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-29" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.KeyWatcher.KeyTicker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1240" y="-760" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-183" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-30" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-30" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.IntegrityChecker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1230" y="-980" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-11" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.IDCollisionTracker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1520" y="-1270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-66" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;endArrow=none;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-19" target="pLcwTUkZ-vxHyysyYa27-11">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-1490" y="-1400" as="sourcePoint" />
+            <mxPoint x="-1420" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-67" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Extras.ReplacementSmeltingHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2310" y="-720" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-69" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Extras.ReplacementCraftingHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2190" y="-970" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-70" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Extras.LoginHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2185" y="-880" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-71" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Extras.IconPrefabs&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2185" y="-780" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-72" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Exception.RegistrationException&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2160" y="-670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-202" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-73" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-73" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Exception.InvalidBuildException&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2040" y="-110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-203" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-74" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-74" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Command.ToggleBlockChangePacketCommand&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2070" y="-40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-205" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-75" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-75" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Command.GetLatencyCommand&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2280" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-206" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-76" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-76" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Command.ExportEnvironmentCommand&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2400" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-77" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Command.DragonCommandBase&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2210" y="-480" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-78" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Command.DragonClientCommand&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2330" y="-280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-195" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-79" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-79" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Command.ClearParticlesCommand&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1760" y="-330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-194" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-80" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-80" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Base.ModHandlerBase.VersionIgnore&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1980" y="-420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-193" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-81" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-81" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Base.ModHandlerBase.VersionHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1620" y="-120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-192" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-82">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-1420" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-82" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Base.ModHandlerBase.SearchVersionHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1860" y="-500" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-191" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-83" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-83" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Base.ModHandlerBase.ClassVersionHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1660" y="-450" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-196" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-84" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-84" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Base.ModHandlerBase&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3660" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-187" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-85" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-85" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Base.DragonAPIMod.LoadProfiler.LoadPhase&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1690" y="-570" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-86" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Base.DragonAPIMod&lt;span style=&quot;color:#cc7832;&quot;&gt;;&lt;/span&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3730" y="860" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-184" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-87" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-87" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Auxiliary.Trackers.VanillaIntegrityTracker&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1810" y="-680" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-89" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModRegistry.PowerTypes&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3945" y="-810" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-91" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.Registry.ReikaDyeHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2730" y="-490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-92" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.Java.ReikaReflectionHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2720" y="-390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-93" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.Java.ReikaObfuscationHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2700" y="-300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-204" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-94" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-94" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.Java.ReikaJavaLibrary&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2080" y="-240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-95" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.Java.ReikaJVMParser&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2370" y="-1110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-96" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.IO.ReikaPacketHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2530" y="-870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-97" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.IO.ReikaCommandHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2510" y="-960" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-98" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.ReikaRegistryHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2200" y="-1150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-99" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.ReikaPotionHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2390" y="-1020" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-100" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.ReikaPlayerAPI&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2210" y="-1050" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-101" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Instantiable.IO.SyncPacket&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2490" y="-350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-102" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Instantiable.IO.ModLogger&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2350" y="-910" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-103" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Instantiable.IO.LagWarningFilter&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2530" y="-760" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-104" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Instantiable.IO.ControlledConfig&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2560" y="-660" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-105" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Instantiable.Event.Client.SinglePlayerLogoutEvent&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2570" y="-580" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-106" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Instantiable.Data.Collections.EventRecipeList&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2480" y="-440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-107" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Instantiable.EntityTumblingBlock&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2390" y="-530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-108" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Extras.TemporaryCodeCalls&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2320" y="-630" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-109" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Extras.SanityCheckNotification&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2320" y="-820" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-110" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.BloodMagicHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3030" y="-920" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-111" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.BerryBushHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3035" y="-830" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-112" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.BCPipeHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3010" y="-740" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-113" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.BCMachineHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2990" y="-640" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-114" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.ArsMagicaHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2940" y="-520" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-115" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.AppEngHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2960" y="-420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-116" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.DeepInteract.TwilightForestLootHooks&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2970" y="-350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-117" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.DeepInteract.ReikaThaumHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2930" y="-260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-200" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-118" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-118" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.DeepInteract.ReikaMystcraftHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="-910" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-207" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-119" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-213" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-119" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-119" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.DeepInteract.MTInteractionManager&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-830" y="410" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-211" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-120" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-120" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.DeepInteract.MESystemReader&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-830" y="630" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-121" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.DeepInteract.FrameBlacklist&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2710" y="-130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-201" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-122" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-122" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.Computers.PeripheralHandlerRelay&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1740" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-218" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-123" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-123" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.Bees.ReikaBeeHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1640" y="410" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-124" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.WailaTechnicalOverride&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2630" y="-1050" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-125" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.MinetweakerHooks&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2770" y="-990" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-126" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.BannedItemReader&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2780" y="-890" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-127" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.Rendering.ReikaRenderHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2770" y="-800" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-128" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.Registry.ReikaOreHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2770" y="-710" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-129" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.Libraries.Registry.ReikaItemHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2760" y="-610" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-215" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-130" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-130" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.RedstoneArsenalHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1770" y="650" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-131" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.RailcraftHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3470" y="-220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-221" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-132" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-132" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.QuantumOreHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2230" y="480" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-133" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.PneumaticPlantHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3530" y="-440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-134" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.OreBerryBushHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3510" y="-600" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-135" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.OpenBlockHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3410" y="-1050" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-136" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.NaturaBlockHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3550" y="-770" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-137" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.MystCraftHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3430" y="-920" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-138" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.MimicryHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3280" y="-1130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-139" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.MekanismHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3220" y="-1240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-140" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.MekToolHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2980" y="-1290" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-141" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.MagicCropHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3080" y="-1180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-142" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.MFRHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3120" y="-1080" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-143" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.LegacyMagicCropHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3260" y="-980" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-144" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.IC2Handler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3290" y="-870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-145" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.HungerOverhaulHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3370" y="-720" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-146" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.HexBlockHandlerSimple&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3290" y="-670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-147" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.HexBlockHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3300" y="-520" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-148" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.HarvestCraftHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3300" y="-380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-214" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-149" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-149" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.GregOreHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1720" y="760" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-208" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-150" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-150" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.GalacticCraftHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1210" y="680" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-217" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-151" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-151" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.ForestryHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1760" y="510" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-219" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-152" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-152" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.FactorizationHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1640" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-153" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.ExtraUtilsHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3220" y="-300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-154" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.DartOreHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3160" y="-460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-155" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.DartItemHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3155" y="-580" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-156" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.ChiselBlockHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3240" y="-790" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-157" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.CarpenterBlockHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2800" y="-1110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-158" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.BoPBlockHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2980" y="-1030" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-159" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModRegistry.ModWoodList&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3940" y="-950" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-160" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModRegistry.ModOreList&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3870" y="-1050" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-216" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-161" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-161" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModRegistry.ModCropList&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-800" y="500" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-220" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="pLcwTUkZ-vxHyysyYa27-162" target="syIfkgLLt6D1KmMYTtCz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-162" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModRegistry.InterfaceCache&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1940" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-163" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.RecipeHandlers.SmelteryRecipeHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3780" y="-400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-164" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.RecipeHandlers.ForestryRecipeHelper&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3870" y="-580" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-165" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.VeryLegacyMagicCropHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3840" y="-730" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-166" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.TwilightForestHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3750" y="-900" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-167" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.TransitionalOreHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3650" y="-1100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-168" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.TinkerToolHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3580" y="-1180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-169" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.TinkerBlockHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3630" y="-990" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-170" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.ThermalHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3670" y="-520" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-171" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.ThaumOreHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3650" y="-660" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pLcwTUkZ-vxHyysyYa27-172" value="&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;Reika.DragonAPI.ModInteract.ItemHandlers.ThaumIDHandler&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-3600" y="-850" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
