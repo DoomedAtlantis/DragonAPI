@@ -55,6 +55,8 @@ import org.objectweb.asm.tree.VarInsnNode;
 import org.objectweb.asm.util.Textifier;
 import org.objectweb.asm.util.TraceMethodVisitor;
 
+import com.google.common.base.Charsets;
+
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.classloading.FMLForgePlugin;
 
@@ -166,8 +168,12 @@ public class ReikaASMHelper {
 		}
 	}
 
+	public static boolean classContainsMethod(ClassNode cn, String name, String desc) {
+		return getMethodByNameAndSig(cn, name, desc) != null;
+	}
+
 	public static boolean classContainsMethod(ClassNode cn, MethodNode mn) {
-		return getMethodByNameAndSig(cn, mn.name, mn.desc) != null;
+		return classContainsMethod(cn, mn.name, mn.desc);
 	}
 
 	public static boolean classContainsMethod(Class c, MethodNode mn) {
@@ -556,6 +562,15 @@ public class ReikaASMHelper {
 			ain = li.get(index);
 		}
 		return ain.getOpcode() == opcode ? ain : null;
+	}
+
+	public static JumpInsnNode getFirstJumpFromLabel(InsnList li, int index, LabelNode jumpTo) {
+		for (AbstractInsnNode ain = li.get(index); index < li.size(); index++) {
+			ain = li.get(index);
+			if (ain instanceof JumpInsnNode && ((JumpInsnNode)ain).label == jumpTo)
+				return (JumpInsnNode) ain;
+		}
+		return null;
 	}
 
 	public static AbstractInsnNode getLastJumpBefore(InsnList li, int index) {
@@ -1041,13 +1056,10 @@ public class ReikaASMHelper {
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS/* | ClassWriter.COMPUTE_FRAMES*/);
 		cn.accept(writer);
 		byte[] newdata = writer.toByteArray();
-		try {
-			File f = new File(folder, cn.name+".class");
+		File f = new File(folder, cn.name+".class");
+		try (FileOutputStream out = new FileOutputStream(f)) {
 			folder.mkdirs();
-			f.createNewFile();
-			FileOutputStream out = new FileOutputStream(f);
 			out.write(newdata);
-			out.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -1225,12 +1237,20 @@ public class ReikaASMHelper {
 		return li;
 	}
 
+	public static LabelNode getFirstLabelBefore(InsnList li, int idx) {
+		for (int i = idx; i >= 0; i--) {
+			AbstractInsnNode ain = li.get(i);
+			if (ain instanceof LabelNode)
+				return (LabelNode)ain;
+		}
+		return null;
+	}
+
 	public static LabelNode getFirstLabelAfter(InsnList li, int idx) {
 		for (int i = idx; i < li.size(); i++) {
 			AbstractInsnNode ain = li.get(i);
-			if (ain instanceof LabelNode) {
+			if (ain instanceof LabelNode)
 				return (LabelNode)ain;
-			}
 		}
 		return null;
 	}
@@ -1254,26 +1274,23 @@ public class ReikaASMHelper {
 	}
 
 	public static void writeClassFile(ClassNode cn, String path) {
-		try {
-			if (FMLForgePlugin.RUNTIME_DEOBF) {
-				cn = copyClassNode(cn);
-				deobfClassFile(cn);
-			}
+		if (FMLForgePlugin.RUNTIME_DEOBF) {
+			cn = copyClassNode(cn);
+			deobfClassFile(cn);
+		}
 
-			ClassWriter writer = new ClassWriter(0);
-			cn.accept(writer);
-			byte[] data = writer.toByteArray();
+		ClassWriter writer = new ClassWriter(0);
+		cn.accept(writer);
+		byte[] data = writer.toByteArray();
 
-			String cname = cn.name.replaceAll("\\.", "/").replaceAll("\\\\", "/");
-			if (activeMod != null)
-				cname = "[BY "+activeMod.toUpperCase(Locale.ENGLISH)+"] "+cname;
+		String cname = cn.name.replaceAll("\\.", "/").replaceAll("\\\\", "/");
+		if (activeMod != null)
+			cname = "[BY "+activeMod.toUpperCase(Locale.ENGLISH)+"] "+cname;
 
-			File f = new File(path, cname+".class");
-			f.getParentFile().mkdirs();
-			f.createNewFile();
-			FileOutputStream out = new FileOutputStream(f);
+		File f = new File(path, cname+".class");
+		f.getParentFile().mkdirs();
+		try (FileOutputStream out = new FileOutputStream(f)) {
 			out.write(data);
-			out.close();
 		}
 		catch (Throwable t) {
 			t.printStackTrace();
@@ -1337,7 +1354,7 @@ public class ReikaASMHelper {
 			DragonAPICore.log("SRGs do not exist. Cannot apply deobf.");
 			return;
 		}
-		ArrayList<String> li = ReikaFileReader.getFileAsLines(f, true);
+		List<String> li = ReikaFileReader.getFileAsLines(f, true, Charsets.UTF_8);
 		for (String s : li) {
 			if (!s.startsWith("CL")) {
 				String[] parts = s.split(" ");
@@ -1367,6 +1384,14 @@ public class ReikaASMHelper {
 		ArrayList<String> li = parseMethodSignature(sig);
 		li.add(li.size()-1, arg);
 		return compileSignature(li);
+	}
+
+	public static void addLeadingArgument(MethodNode min, String arg) {
+		min.desc = addLeadingArgument(min.desc, arg);
+	}
+
+	public static void addTrailingArgument(MethodNode min, String arg) {
+		min.desc = addTrailingArgument(min.desc, arg);
 	}
 
 	public static void addLeadingArgument(MethodInsnNode min, String arg) {

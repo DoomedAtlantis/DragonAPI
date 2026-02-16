@@ -3,18 +3,21 @@ package Reika.DragonAPI.IO.Shaders;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.IntBuffer;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL40;
+
+import com.google.common.base.Charsets;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -49,6 +52,8 @@ public class ShaderRegistry {
 
 	private static ShaderProgram currentlyRunning;
 	private static ShaderDomain activeType;
+
+	private static final HashSet<String> reloadKeyPressed = new HashSet();
 
 	public static void registerWorldShaderSystem(WorldShaderSystem ws) {
 		if (worldShaderSystem != null)
@@ -114,12 +119,18 @@ public class ShaderRegistry {
 		if (currentlyRunning != null && currentlyRunning != sh)
 			error(sh.owner, sh.identifier, "Cannot start one shader while another is running!", null);
 		if (reloadKey()) {
-			try {
-				reloadShader(sh.identifier);
+			if (!reloadKeyPressed.contains(sh.identifier)) {
+				reloadKeyPressed.add(sh.identifier);
+				try {
+					reloadShader(sh.identifier);
+				}
+				catch (IOException e) {
+					error(sh.owner, sh.identifier, "Shader threw IOException during reload!", null, e);
+				}
 			}
-			catch (IOException e) {
-				error(sh.owner, sh.identifier, "Shader threw IOException during reload!", null, e);
-			}
+		}
+		else {
+			reloadKeyPressed.remove(sh.identifier);
 		}
 		currentlyRunning = sh;
 		if (GuiScreen.isCtrlKeyDown() && Keyboard.isKeyDown(Keyboard.KEY_LMENU) && Keyboard.isKeyDown(Keyboard.KEY_C) && ReikaObfuscationHelper.isDeObfEnvironment()) {
@@ -205,7 +216,7 @@ public class ShaderRegistry {
 
 	private static String readData(DragonAPIMod mod, String id, ShaderTypes type, InputStream data, Collection<ShaderLibrary> libs) {
 		StringBuilder sb = new StringBuilder();
-		ArrayList<String> li = ReikaFileReader.getFileAsLines(data, true, Charset.defaultCharset());
+		List<String> li = ReikaFileReader.getFileAsLines(data, true, Charsets.UTF_8);
 		for (String s : li) {
 			if (s.startsWith("#import")) {
 				String[] parts = s.split(" ");
@@ -275,7 +286,7 @@ public class ShaderRegistry {
 	}
 
 	public static String parseError(int programID) {
-		return GL20.glGetShaderInfoLog(programID, GL20.glGetShaderi(programID, GL20.GL_INFO_LOG_LENGTH));
+		return GL20.glGetShaderInfoLog(programID, /*GL20.glGetProgrami(programID, GL20.GL_INFO_LOG_LENGTH)*/524288);
 	}
 
 	public static enum ShaderDomain {

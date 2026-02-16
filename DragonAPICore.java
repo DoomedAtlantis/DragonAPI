@@ -29,6 +29,7 @@ import Reika.DragonAPI.Exception.MisuseException;
 import Reika.DragonAPI.Exception.RegistrationException;
 import Reika.DragonAPI.IO.DirectResourceManager;
 import Reika.DragonAPI.Instantiable.Event.Client.GameFinishedLoadingEvent;
+import Reika.DragonAPI.Instantiable.IO.ModLogger;
 import Reika.DragonAPI.Libraries.Java.ReikaJavaLibrary;
 import Reika.DragonAPI.Libraries.Java.ReikaObfuscationHelper;
 
@@ -128,13 +129,13 @@ public class DragonAPICore {
 	private static boolean calculateReikasComputer() {
 		try {
 			String username = System.getProperty("user.name");
-			boolean win = System.getProperty("os.name").equals("Windows 7");
+			boolean win = System.getProperty("os.name").equals("Windows 10");
 			int cpus = Runtime.getRuntime().availableProcessors();
 			String cpu = System.getProperty("os.arch");
 			long diskSize = new File("c:").getTotalSpace();
 
 			if (win && "amd64".equals(cpu)) {
-				if (diskSize == 119926681600L && cpus == 8 && "Reika".equals(username))
+				if (diskSize == 999524175872L && cpus == 24 && "Reika".equals(username))
 					return true;
 			}
 			return false;
@@ -202,15 +203,27 @@ public class DragonAPICore {
 	}
 
 	public static void debug(Object s) {
-		DragonAPIInit.instance.getModLogger().debug(s);
+		ModLogger log = DragonAPIInit.instance == null ? null : DragonAPIInit.instance.getModLogger();
+		if (log == null)
+			ReikaJavaLibrary.pConsole("DRAGONAPI DEBUG: "+s);
+		else
+			log.debug(s);
 	}
 
 	public static void log(Object s) {
-		DragonAPIInit.instance.getModLogger().log(s);
+		ModLogger log = DragonAPIInit.instance == null ? null : DragonAPIInit.instance.getModLogger();
+		if (log == null)
+			ReikaJavaLibrary.pConsole("DRAGONAPI: "+s);
+		else
+			log.log(s);
 	}
 
 	public static void logError(Object s) {
-		DragonAPIInit.instance.getModLogger().logError(s);
+		ModLogger log = DragonAPIInit.instance == null ? null : DragonAPIInit.instance.getModLogger();
+		if (log == null)
+			ReikaJavaLibrary.pConsole("DRAGONAPI ERROR: "+s);
+		else
+			log.logError(s);
 	}
 
 	public static void logError(Object o, Side side) {

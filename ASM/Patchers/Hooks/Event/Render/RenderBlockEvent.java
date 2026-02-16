@@ -1,8 +1,8 @@
 /*******************************************************************************
  * @author Reika Kalseki
- * 
+ *
  * Copyright 2017
- * 
+ *
  * All rights reserved.
  * Distribution of the software in any form is only allowed with
  * explicit, prior permission from the owner.
@@ -19,6 +19,7 @@ import org.objectweb.asm.tree.VarInsnNode;
 import net.minecraftforge.classloading.FMLForgePlugin;
 
 import Reika.DragonAPI.ASM.Patchers.Patcher;
+import Reika.DragonAPI.Auxiliary.CoreModDetection;
 import Reika.DragonAPI.Libraries.Java.ReikaASMHelper;
 
 public class RenderBlockEvent extends Patcher {
@@ -27,9 +28,9 @@ public class RenderBlockEvent extends Patcher {
 		super("net.minecraft.client.renderer.WorldRenderer", "blo");
 	}
 
-    @Override
-    protected void apply(ClassNode cn) {
-    	MethodNode m = ReikaASMHelper.getMethodByName(cn, "func_147892_a", "updateRenderer", "(Lnet/minecraft/entity/EntityLivingBase;)V");
+	@Override
+	protected void apply(ClassNode cn) {
+		MethodNode m = ReikaASMHelper.getMethodByName(cn, "func_147892_a", "updateRenderer", "(Lnet/minecraft/entity/EntityLivingBase;)V");
 		String name = FMLForgePlugin.RUNTIME_DEOBF ? "func_147805_b" : "renderBlockByRenderType";
 		MethodInsnNode min = ReikaASMHelper.getFirstMethodCall(cn, m, "net/minecraft/client/renderer/RenderBlocks", name, "(Lnet/minecraft/block/Block;III)Z");
 
@@ -45,6 +46,9 @@ public class RenderBlockEvent extends Patcher {
 		m.instructions.remove(ain);
 		//ReikaJavaLibrary.pConsole(ReikaASMHelper.clearString(m.instructions));
 		 */
+		VarInsnNode z = (VarInsnNode)ReikaASMHelper.getLastOpcodeBefore(m.instructions, m.instructions.indexOf(min), Opcodes.ILOAD);
+		VarInsnNode y = (VarInsnNode)z.getPrevious();
+		VarInsnNode x = (VarInsnNode)y.getPrevious();
 
 		name = FMLForgePlugin.RUNTIME_DEOBF ? "func_149701_w" : "getRenderBlockPass";
 		MethodInsnNode checkpass = ReikaASMHelper.getFirstMethodCall(cn, m, "net/minecraft/block/Block", name, "()I");
@@ -68,6 +72,37 @@ public class RenderBlockEvent extends Patcher {
 		m.instructions.insertBefore(min, new VarInsnNode(Opcodes.ALOAD, 0));
 		m.instructions.insertBefore(min, new VarInsnNode(Opcodes.ILOAD, pass)); //renderpass "k2"
 
-		//ReikaJavaLibrary.pConsole(ReikaASMHelper.clearString(m.instructions));
-    }
+		checkpass.desc = "(Lnet/minecraft/block/Block;III)I";
+		checkpass.name = "getMaxRenderPass";
+		checkpass.owner = evt;
+		checkpass.setOpcode(Opcodes.INVOKESTATIC);
+		m.instructions.insertBefore(checkpass, new VarInsnNode(Opcodes.ILOAD, x.var)); //x "j3"
+		m.instructions.insertBefore(checkpass, new VarInsnNode(Opcodes.ILOAD, y.var)); //y "l2"
+		m.instructions.insertBefore(checkpass, new VarInsnNode(Opcodes.ILOAD, z.var)); //z "i3"
+
+		String call = "checkCanRenderPass";
+		String sig = "(Lnet/minecraft/block/Block;IIII)Z";
+		if (CoreModDetection.OPTIFINE.isInstalled()) {
+			AbstractInsnNode ref = ReikaASMHelper.getFirstFieldCallByName(cn, m, "ForgeBlock_canRenderInPass");
+			ref = ReikaASMHelper.getFirstInsnAfter(m.instructions, m.instructions.indexOf(ref), Opcodes.ALOAD, 25);
+			AbstractInsnNode ref2 = ReikaASMHelper.getFirstInsnAfter(m.instructions, m.instructions.indexOf(ref), Opcodes.ISTORE, 28);
+			ReikaASMHelper.deleteFrom(cn, m.instructions, ref.getNext(), ref2.getPrevious());
+			m.instructions.insertBefore(ref2, new VarInsnNode(Opcodes.ILOAD, pass)); //pass
+			m.instructions.insertBefore(ref2, new VarInsnNode(Opcodes.ILOAD, x.var)); //x "j3"
+			m.instructions.insertBefore(ref2, new VarInsnNode(Opcodes.ILOAD, y.var)); //y "l2"
+			m.instructions.insertBefore(ref2, new VarInsnNode(Opcodes.ILOAD, z.var)); //z "i3"
+			m.instructions.insertBefore(ref2, new MethodInsnNode(Opcodes.INVOKESTATIC, evt, call, sig, false));
+
+		}
+		else {
+			checkpass = ReikaASMHelper.getFirstMethodCallByName(cn, m, "canRenderInPass");
+			checkpass.desc = sig;
+			checkpass.name = call;
+			checkpass.owner = evt;
+			checkpass.setOpcode(Opcodes.INVOKESTATIC);
+			m.instructions.insertBefore(checkpass, new VarInsnNode(Opcodes.ILOAD, x.var)); //x "j3"
+			m.instructions.insertBefore(checkpass, new VarInsnNode(Opcodes.ILOAD, y.var)); //y "l2"
+			m.instructions.insertBefore(checkpass, new VarInsnNode(Opcodes.ILOAD, z.var)); //z "i3"
+		}
+	}
 }

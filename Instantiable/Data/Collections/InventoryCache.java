@@ -1,8 +1,8 @@
 /*******************************************************************************
  * @author Reika Kalseki
- * 
+ *
  * Copyright 2017
- * 
+ *
  * All rights reserved.
  * Distribution of the software in any form is only allowed with
  * explicit, prior permission from the owner.
@@ -14,13 +14,20 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import com.jaquadro.minecraft.storagedrawers.api.storage.IDrawer;
+import com.jaquadro.minecraft.storagedrawers.api.storage.IDrawerGroup;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
+import Reika.DragonAPI.ModList;
 import Reika.DragonAPI.ASM.DependentMethodStripper.ClassDependent;
+import Reika.DragonAPI.ASM.DependentMethodStripper.ModDependent;
+import Reika.DragonAPI.Instantiable.Data.KeyedItemStack;
 import Reika.DragonAPI.Instantiable.Data.Immutable.InventorySlot;
 import Reika.DragonAPI.Instantiable.Data.Maps.ItemHashMap;
+import Reika.DragonAPI.Instantiable.Recipe.ItemMatch;
 import Reika.DragonAPI.Libraries.ReikaInventoryHelper;
 import Reika.DragonAPI.ModRegistry.InterfaceCache;
 
@@ -33,6 +40,9 @@ public class InventoryCache {
 
 	private final ItemHashMap<Collection<IDeepStorageUnit>> dsus = new ItemHashMap().enableNBT();
 
+	@ModDependent(ModList.STORAGEDRAWERS)
+	private IDrawerGroup drawers;
+
 	public InventoryCache() {
 
 	}
@@ -40,6 +50,10 @@ public class InventoryCache {
 	public InventoryCache addInventory(IInventory ii) {
 		if (InterfaceCache.DSU.instanceOf(ii)) {
 			this.addDSU((IDeepStorageUnit)ii);
+		}
+		else if (InterfaceCache.DRAWER.instanceOf(ii)) {
+			this.addDrawer((IDrawerGroup)ii);
+			return this;
 		}
 		else {
 			for (int i = 0; i < ii.getSizeInventory(); i++) {
@@ -61,6 +75,17 @@ public class InventoryCache {
 			}
 			c.add(dsu);
 		}
+	}
+
+	@ModDependent(ModList.STORAGEDRAWERS)
+	private void addDrawer(IDrawerGroup grp) {/*
+		for (int i = 0; i < grp.getDrawerCount(); i++) {
+			IDrawer dwr = grp.getDrawer(i);
+			ItemStack is = dwr.getStoredItemPrototype();
+			if (is != null)
+				drawers.put(is, dwr);
+		}*/
+		drawers = grp;
 	}
 
 	public InventoryCache addSlot(InventorySlot slot) {
@@ -90,6 +115,8 @@ public class InventoryCache {
 	public int addItemsToUnderlyingInventories(ItemStack is, boolean simulate) {
 		this.validateInventories();
 		int left = is.stackSize;
+		if (ModList.STORAGEDRAWERS.isLoaded() && drawers != null)
+			left -= ReikaInventoryHelper.drawerInventory.addItem(drawers, is, false, !simulate);
 		for (IInventory ii : inventories) {
 			left = ReikaInventoryHelper.addToInventoryWithLeftover(is, ii, simulate);
 			if (!simulate)
@@ -114,6 +141,14 @@ public class InventoryCache {
 			for (IDeepStorageUnit dsu : li2) {
 				if (is.stackTagCompound == null || is.stackTagCompound.equals(dsu.getStoredItemType().stackTagCompound))
 					count += dsu.getStoredItemType().stackSize;
+			}
+		}
+		if (ModList.STORAGEDRAWERS.isLoaded() && drawers != null) {
+			for (int i = 0; i < drawers.getDrawerCount(); i++) {
+				IDrawer dwr = drawers.getDrawer(i);
+				ItemStack in = dwr.getStoredItemPrototype();
+				if (is.stackTagCompound == null || is.stackTagCompound.equals(in.stackTagCompound))
+					count += dwr.getStoredItemCount();
 			}
 		}
 		return count;
@@ -179,6 +214,11 @@ public class InventoryCache {
 				}
 			}
 		}
+		if (ModList.STORAGEDRAWERS.isLoaded() && drawers != null) {
+			ItemStack take = ReikaInventoryHelper.drawerInventory.takeItem(drawers, new ItemMatch().addItem(new KeyedItemStack(is).setIgnoreNBT(false)), amt, true);
+			if (take != null)
+				rem += take.stackSize;
+		}
 		return rem;
 	}
 
@@ -207,25 +247,13 @@ public class InventoryCache {
 		data.clear();
 		inventories.clear();
 		dsus.clear();
+		if (ModList.STORAGEDRAWERS.isLoaded())
+			drawers = null;
 	}
 
 	@Override
 	public String toString() {
 		return data.toString();
-	}
-
-	private static abstract class InventoryInterface {
-
-		private final IInventory inventory;
-
-		private InventoryInterface(IInventory ii) {
-			inventory = ii;
-		}
-
-		protected abstract void removeItem(ItemStack is, int amt);
-		protected abstract void addItem(ItemStack is, int amt);
-		protected abstract int countItem(ItemStack is);
-
 	}
 
 }

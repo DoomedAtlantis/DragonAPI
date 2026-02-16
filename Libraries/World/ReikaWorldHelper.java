@@ -39,6 +39,7 @@ import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -104,6 +105,7 @@ import Reika.DragonAPI.Instantiable.Data.Immutable.WorldChunk;
 import Reika.DragonAPI.Instantiable.Event.IceFreezeEvent;
 import Reika.DragonAPI.Instantiable.Event.MobTargetingEvent;
 import Reika.DragonAPI.Instantiable.Math.Noise.Simplex3DGenerator;
+import Reika.DragonAPI.Interfaces.CustomTemperatureBiome;
 import Reika.DragonAPI.Interfaces.Callbacks.PositionCallable;
 import Reika.DragonAPI.Libraries.ReikaEntityHelper;
 import Reika.DragonAPI.Libraries.ReikaFluidHelper;
@@ -111,6 +113,7 @@ import Reika.DragonAPI.Libraries.ReikaNBTHelper.NBTTypes;
 import Reika.DragonAPI.Libraries.ReikaSpawnerHelper;
 import Reika.DragonAPI.Libraries.IO.ReikaPacketHelper;
 import Reika.DragonAPI.Libraries.IO.ReikaSoundHelper;
+import Reika.DragonAPI.Libraries.Java.ReikaJavaLibrary;
 import Reika.DragonAPI.Libraries.Java.ReikaObfuscationHelper;
 import Reika.DragonAPI.Libraries.Java.ReikaRandomHelper;
 import Reika.DragonAPI.Libraries.MathSci.ReikaMathLibrary;
@@ -146,12 +149,15 @@ public final class ReikaWorldHelper extends DragonAPICore {
 
 	private static final HashMap<Material, TemperatureEffect> temperatureBlockEffects = new HashMap();
 	private static final HashMap<String, WorldID> worldIDMap = new HashMap();
+	private static final HashMap<Integer, String> worldKeys = new HashMap();
 
 	private static final HashMap<Class, Boolean> fakeWorldTypes = new HashMap();
 
 	private static final HashMap<ImmutablePair<Integer, Long>, Simplex3DGenerator> tempNoise = new HashMap();
 
 	private static final double TEMP_NOISE_BASE = 10;
+
+	public static WorldIDBase clientWorldID;
 
 	static {
 		try {
@@ -1356,7 +1362,7 @@ public final class ReikaWorldHelper extends DragonAPICore {
 	}
 
 	/** Sets the biome type at an xz column. Args: World, x, z, biome */
-	public static void setBiomeForXZ(World world, int x, int z, BiomeGenBase biome) {
+	public static void setBiomeForXZ(World world, int x, int z, BiomeGenBase biome, boolean applyEnvironment) {
 		Chunk ch = world.getChunkFromBlockCoords(x, z);
 
 		int ax = x-ch.xPosition*16;
@@ -1371,8 +1377,10 @@ public final class ReikaWorldHelper extends DragonAPICore {
 		biomes[index] = (byte)biome.biomeID;
 		ch.setBiomeArray(biomes);
 		ch.setChunkModified();
-		for (int i = 0; i < 256; i++)
-			temperatureEnvironment(world, x, i, z, ReikaBiomeHelper.getBiomeTemp(world, biome));
+		if (applyEnvironment) {
+			for (int i = 0; i < 256; i++)
+				temperatureEnvironment(world, x, i, z, ReikaBiomeHelper.getBiomeTemp(world, biome));
+		}
 
 		if (!world.isRemote) {
 			int packet = APIPacketHandler.PacketIDs.BIOMECHANGE.ordinal();
@@ -1387,7 +1395,7 @@ public final class ReikaWorldHelper extends DragonAPICore {
 	}
 
 	/** Sets the biome type at an xz column and mimics its generation. Args: World, x, z, biome */
-	public static void setBiomeAndBlocksForXZ(World world, int x, int z, BiomeGenBase biome) {
+	public static void setBiomeAndBlocksForXZ(World world, int x, int z, BiomeGenBase biome, boolean applyEnvironment) {
 		Chunk ch = world.getChunkFromBlockCoords(x, z);
 
 		int ax = x-ch.xPosition*16;
@@ -1404,8 +1412,10 @@ public final class ReikaWorldHelper extends DragonAPICore {
 
 		biomes[index] = (byte)biome.biomeID;
 		ch.setBiomeArray(biomes);
-		for (int i = 0; i < 256; i++)
-			temperatureEnvironment(world, x, i, z, ReikaBiomeHelper.getBiomeTemp(world, biome));
+		if (applyEnvironment) {
+			for (int i = 0; i < 256; i++)
+				temperatureEnvironment(world, x, i, z, ReikaBiomeHelper.getBiomeTemp(world, biome));
+		}
 
 		if (!world.isRemote) {
 			int packet = APIPacketHandler.PacketIDs.BIOMECHANGE.ordinal();
@@ -1538,7 +1548,7 @@ public final class ReikaWorldHelper extends DragonAPICore {
 		}
 	}
 
-	/** Get the sun brightness as a fraction from 0-1. Args: World, whether to apply weather modulation */
+	/** Get the sun brightness as a fraction from 0 to 1. Args: World, whether to apply weather modulation */
 	public static float getSunIntensity(World world, boolean weather, float ptick) {
 		float ang = world.getCelestialAngle(ptick);
 		float base = 1.0F-(MathHelper.cos(ang*(float)Math.PI*2.0F)*2.0F+0.2F);
@@ -1554,7 +1564,7 @@ public final class ReikaWorldHelper extends DragonAPICore {
 			base = (float)(base*(1.0D-world.getRainStrength(ptick)*5.0F / 16.0D));
 			base = (float)(base*(1.0D-world.getWeightedThunderStrength(ptick)*5.0F / 16.0D));
 		}
-		return base*0.8F+0.2F;
+		return base;
 	}
 
 	/** Returns the sun's declination, clamped to 0-90. Args: World */
@@ -1714,7 +1724,8 @@ public final class ReikaWorldHelper extends DragonAPICore {
 	}
 
 	public static int getAmbientTemperatureAt(World world, int x, int y, int z, float varFactor) {
-		int Tamb = ReikaBiomeHelper.getBiomeTemp(world, x, z);
+		BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+		int Tamb = ReikaBiomeHelper.getBiomeTemp(world, biome);
 		float temp = Tamb;
 
 		if (SpecialDayTracker.instance.isWinterEnabled() && world.provider.dimensionId != -1) {
@@ -1724,6 +1735,8 @@ public final class ReikaWorldHelper extends DragonAPICore {
 		if (varFactor > 0) {
 			Simplex3DGenerator gen = getOrCreateTemperatureNoise(world);
 			//ReikaJavaLibrary.pConsole(new Coordinate(x, y, z)+" > "+gen.getValue(x, y, z));
+			if (biome instanceof CustomTemperatureBiome)
+				varFactor *= ((CustomTemperatureBiome)biome).getNoiseVariationStrength(world, x, y, z, varFactor);
 			temp += gen.getValue(x, y, z)*varFactor*TEMP_NOISE_BASE;
 		}
 
@@ -1740,8 +1753,10 @@ public final class ReikaWorldHelper extends DragonAPICore {
 			if (!world.provider.hasNoSky) {
 				if (world.canBlockSeeTheSky(x, y+1, z)) {
 					float sun = getSunIntensity(world, true, 0);
-					int mult = world.isRaining() ? 10 : 20;
-					temp += (sun-0.75F)*mult;
+					if (biome instanceof CustomTemperatureBiome)
+						temp += ((CustomTemperatureBiome)biome).getSurfaceTemperatureModifier(world, x, y, z, temp, sun);
+					else
+						temp += (sun-0.75F)*(world.isRaining() ? 10 : 20);
 				}
 				if (!isVoidWorld(world, x, z)) {
 					int h = world.provider.getAverageGroundLevel();
@@ -1762,6 +1777,8 @@ public final class ReikaWorldHelper extends DragonAPICore {
 					}
 					if (y > 96) {
 						temp -= (y-96)/4;
+						if (biome instanceof CustomTemperatureBiome)
+							temp += ((CustomTemperatureBiome)biome).getAltitudeTemperatureModifier(world, x, y, z, temp, -dy);
 					}
 				}
 			}
@@ -1857,7 +1874,7 @@ public final class ReikaWorldHelper extends DragonAPICore {
 		return false;
 	}
 
-	public static int countAdjacentBlocks(World world, int x, int y, int z, Block id, boolean checkCorners) {
+	public static int countAdjacentBlocks(IBlockAccess world, int x, int y, int z, Block id, boolean checkCorners) {
 		int count = 0;
 		for (int i = 0; i < 6; i++) {
 			ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[i];
@@ -1988,7 +2005,7 @@ public final class ReikaWorldHelper extends DragonAPICore {
 		return loader instanceof AnvilChunkLoader && ((AnvilChunkLoader)loader).chunkExists(world, x, z);
 	}
 
-	public static int getWaterDepth(World world, int x, int y, int z) {
+	public static int getWaterDepth(IBlockAccess world, int x, int y, int z) {
 		Block b = world.getBlock(x, y, z);
 		int c = 0;
 		while (b == Blocks.water) {
@@ -2379,14 +2396,16 @@ public final class ReikaWorldHelper extends DragonAPICore {
 		return world.getBiomeGenForCoords(x0, z0) == b || world.getBiomeGenForCoords(x1, z0) == b || world.getBiomeGenForCoords(x0, z1) == b || world.getBiomeGenForCoords(x1, z1) == b;
 	}
 
-	public static boolean isAdjacentToCrop(IBlockAccess iba, int x, int y, int z) {
+	public static boolean isAdjacentToCrop(World world, int x, int y, int z) {
 		for (int i = 2; i < 6; i++) {
 			ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[i];
 			int dx = x+dir.offsetX;
 			int dz = z+dir.offsetZ;
-			Block id = iba.getBlock(dx, y, dz);
-			if (ReikaCropHelper.getCrop(id) != null || ModCropList.getModCrop(id, iba.getBlockMetadata(dx, y, dz)) != null) {
-				return true;
+			if (world.checkChunksExist(dx, y, dz, dx, y, dz)) {
+				Block id = world.getBlock(dx, y, dz);
+				if (ReikaCropHelper.getCrop(id) != null || ModCropList.getModCrop(id, world.getBlockMetadata(dx, y, dz)) != null) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -2512,7 +2531,7 @@ public final class ReikaWorldHelper extends DragonAPICore {
 		}
 	}
 
-	public static void convertBiomeRegionFrom(World world, int x, int z, BiomeGenBase from, BiomeGenBase to, BiomeGenBase same, int depthLimit) {
+	public static void convertBiomeRegionFrom(World world, int x, int z, BiomeGenBase from, BiomeGenBase to, BiomeGenBase same, int depthLimit, boolean applyEnv) {
 		HashSet<Coordinate> done = new HashSet();
 		HashSet<Coordinate> next = new HashSet();
 		HashSet<Coordinate> next2 = new HashSet();
@@ -2524,7 +2543,7 @@ public final class ReikaWorldHelper extends DragonAPICore {
 				if (put == from && same != null) {
 					put = same;
 				}
-				setBiomeForXZ(world, c.xCoord, c.zCoord, put);
+				setBiomeForXZ(world, c.xCoord, c.zCoord, put, applyEnv);
 				for (int i = 2; i < 6; i++) {
 					ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[i];
 					Coordinate c2 = c.offset(dir, 1);
@@ -2552,8 +2571,17 @@ public final class ReikaWorldHelper extends DragonAPICore {
 	}
 
 	private static String getWorldKey(World world) {
-		File f = world.getSaveHandler().getWorldDirectory();
-		return ReikaFileReader.getRealPath(f);//ReikaFileReader.getRelativePath(DragonAPICore.getMinecraftDirectory(), f);
+		String key = worldKeys.get(world.provider.dimensionId);
+		if (key == null) {
+			File f = world.getSaveHandler().getWorldDirectory();
+			key = ReikaFileReader.getRealPath(f);//ReikaFileReader.getRelativePath(DragonAPICore.getMinecraftDirectory(), f);
+			worldKeys.put(world.provider.dimensionId, key);
+		}
+		return key;
+	}
+
+	public static void clearWorldKeyCache() {
+		worldKeys.clear();
 	}
 
 	private static WorldID calculateWorldID(World world) {
@@ -2588,16 +2616,37 @@ public final class ReikaWorldHelper extends DragonAPICore {
 		id.writeToFile(f);
 	}
 
-	public static final class WorldID {
-
-		private static int worldsThisSession = 0;
-
-		private static final WorldID NONEXISTENT = new WorldID(0, 0, 0, "[NONEXISTENT]", "[NONEXISTENT]", new HashSet());
+	public static class WorldIDBase {
 
 		public final long worldCreationTime;
 		public final long sourceSessionStartTime;
 		public final long sessionWorldIndex;
 		public final String originalFolder;
+
+		public WorldIDBase(long time, long session, long index, String folder) {
+			worldCreationTime = time;
+			sourceSessionStartTime = session;
+			sessionWorldIndex = index;
+			originalFolder = folder;
+		}
+
+		public final long getUniqueHash() {
+			return worldCreationTime ^ ((((long)originalFolder.hashCode()) << 32) | sessionWorldIndex);
+		}
+
+		@Override
+		public final String toString() {
+			return this.getClass().getSimpleName()+" "+worldCreationTime+" in "+originalFolder+"#"+sessionWorldIndex;
+		}
+
+	}
+
+	public static final class WorldID extends WorldIDBase {
+
+		private static int worldsThisSession = 0;
+
+		private static final WorldID NONEXISTENT = new WorldID(0, 0, 0, "[NONEXISTENT]", "[NONEXISTENT]", new HashSet());
+
 		public final String creatingPlayer;
 
 		private final HashSet<String> modList;
@@ -2616,10 +2665,7 @@ public final class ReikaWorldHelper extends DragonAPICore {
 		}
 
 		private WorldID(long time, long session, int index, String folder, String player, HashSet<String> modlist) {
-			worldCreationTime = time;
-			sourceSessionStartTime = session;
-			sessionWorldIndex = index;
-			originalFolder = folder;
+			super(time, session, index, folder);
 			creatingPlayer = player;
 			modList = modlist;
 		}
@@ -2665,6 +2711,13 @@ public final class ReikaWorldHelper extends DragonAPICore {
 				e.printStackTrace();
 				return NONEXISTENT;
 			}
+		}
+
+		public void sendClientPacket(EntityPlayerMP ep) {
+			int[] timeInts = ReikaJavaLibrary.splitLong(worldCreationTime);
+			int[] sessionInts = ReikaJavaLibrary.splitLong(sourceSessionStartTime);
+			int[] indexInts = ReikaJavaLibrary.splitLong(sessionWorldIndex);
+			ReikaPacketHelper.sendStringIntPacket(DragonAPIInit.packetChannel, PacketIDs.WORLDID.ordinal(), ep, originalFolder, timeInts[0], timeInts[1], sessionInts[0], sessionInts[1], indexInts[0], indexInts[1]);
 		}
 
 	}

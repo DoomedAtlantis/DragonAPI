@@ -61,6 +61,7 @@ import Reika.DragonAPI.Libraries.Java.ReikaJavaLibrary;
 import Reika.DragonAPI.Libraries.Registry.ReikaParticleHelper;
 import Reika.DragonAPI.Libraries.Rendering.ReikaRenderHelper;
 import Reika.DragonAPI.Libraries.World.ReikaWorldHelper;
+import Reika.DragonAPI.Libraries.World.ReikaWorldHelper.WorldIDBase;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -226,7 +227,7 @@ public class APIPacketHandler implements PacketHandler {
 					}
 					break;
 				case BIOMECHANGE:
-					ReikaWorldHelper.setBiomeForXZ(world, x, z, BiomeGenBase.biomeList[data[0]]);
+					ReikaWorldHelper.setBiomeForXZ(world, x, z, BiomeGenBase.biomeList[data[0]], false);
 					world.markBlockRangeForRenderUpdate(x, 0, z, x, world.provider.getActualHeight(), z);
 					break;
 				case KEYUPDATE:
@@ -281,7 +282,10 @@ public class APIPacketHandler implements PacketHandler {
 					ReikaPlayerAPI.syncCustomData((EntityPlayerMP)ep);
 					break;
 				case RERENDER:
-					ReikaRenderHelper.rerenderAllChunks();
+					if (data[0] > 0)
+						ReikaRenderHelper.rerenderAllChunksLazily();
+					else
+						ReikaRenderHelper.rerenderAllChunks();
 					break;
 				case COLOREDPARTICLE:
 					ReikaParticleHelper.spawnColoredParticlesWithOutset(world, x, y, z, data[0], data[1], data[2], data[3], data[4]/16D);
@@ -398,6 +402,11 @@ public class APIPacketHandler implements PacketHandler {
 					break;
 				case OREDUMP:
 					break;
+				case WORLDID:
+					break;
+				case SETAIR:
+					world.setBlockToAir(data[0], data[1], data[2]);
+					break;
 			}
 			if (world.isRemote)
 				this.clientHandle(world, x, y, z, pack, data, stringdata, ep);
@@ -481,6 +490,12 @@ public class APIPacketHandler implements PacketHandler {
 			case OREDUMP:
 				OreDumpCommand.dumpClientside(sg);
 				break;
+			case WORLDID:
+				long time = ReikaJavaLibrary.buildLong(data[0], data[1]);
+				long session = ReikaJavaLibrary.buildLong(data[2], data[3]);
+				long index = ReikaJavaLibrary.buildLong(data[4], data[5]);
+				ReikaWorldHelper.clientWorldID = new WorldIDBase(time, session, index, sg);
+				break;
 			default:
 				break;
 		}
@@ -534,7 +549,10 @@ public class APIPacketHandler implements PacketHandler {
 		ENTITYVERIFYFAIL(),
 		CLEARCHAT(),
 		MODLOCK(),
-		OREDUMP();
+		OREDUMP(),
+		WORLDID(),
+		SETAIR(),
+		;
 
 		public static PacketIDs getEnum(int index) {
 			return PacketIDs.values()[index];
@@ -600,6 +618,12 @@ public class APIPacketHandler implements PacketHandler {
 					return 2;
 				case POPUP:
 					return 1;
+				case WORLDID:
+					return 6;
+				case RERENDER:
+					return 1;
+				case SETAIR:
+					return 3;
 				default:
 					return 0;
 			}

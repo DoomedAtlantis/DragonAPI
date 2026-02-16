@@ -41,6 +41,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -53,6 +54,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import Reika.DragonAPI.DragonAPICore;
 import Reika.DragonAPI.Auxiliary.Trackers.TickRegistry.TickHandler;
 import Reika.DragonAPI.Auxiliary.Trackers.TickRegistry.TickType;
+import Reika.DragonAPI.Base.BlockTileEnum;
 import Reika.DragonAPI.IO.Shaders.ShaderProgram;
 import Reika.DragonAPI.IO.Shaders.ShaderRegistry;
 import Reika.DragonAPI.Instantiable.CubePoints;
@@ -63,6 +65,7 @@ import Reika.DragonAPI.Interfaces.TileModel;
 import Reika.DragonAPI.Interfaces.TileEntity.RenderFetcher;
 import Reika.DragonAPI.Libraries.IO.ReikaTextureHelper;
 import Reika.DragonAPI.Libraries.Java.ReikaGLHelper.BlendMode;
+import Reika.DragonAPI.Libraries.Java.ReikaObfuscationHelper;
 import Reika.DragonAPI.Libraries.Java.ReikaRandomHelper;
 import Reika.DragonAPI.Libraries.World.ReikaBiomeHelper;
 
@@ -312,7 +315,7 @@ public final class ReikaRenderHelper extends DragonAPICore {
 			double overy = py+ReikaModelledBreakFX.pw-p[2];
 			if (overy > 0)
 				py -= overy;
-			eff.addEffect(new ReikaModelledBreakFX(world, x+rand.nextDouble(), y+rand.nextDouble(), z+rand.nextDouble(), -1+rand.nextDouble()*2, 2, -1+rand.nextDouble()*2, b, 0, world.getBlockMetadata(x, y, z), file, px, py, mod));
+			eff.addEffect(new ReikaModelledBreakFX(world, x+rand.nextDouble(), y+rand.nextDouble(), z+rand.nextDouble(), -0.1+rand.nextDouble()*0.2, 0.2, -0.1+rand.nextDouble()*0.2, b, 0, world.getBlockMetadata(x, y, z), file, px, py, mod));
 		}
 		return true;
 	}
@@ -349,7 +352,7 @@ public final class ReikaRenderHelper extends DragonAPICore {
 			double overy = py+ReikaModelledBreakFX.pw-p[2];
 			if (overy > 0)
 				py -= overy;
-			eff.addEffect(new ReikaModelledBreakFX(world, x+rand.nextDouble(), y+rand.nextDouble(), z+rand.nextDouble(), -1+rand.nextDouble()*2, 2, -1+rand.nextDouble()*2, b, 0, world.getBlockMetadata(x, y, z), file, px, py, mod));
+			eff.addEffect(new ReikaModelledBreakFX(world, x+rand.nextDouble(), y+rand.nextDouble(), z+rand.nextDouble(), -0.1+rand.nextDouble()*0.2, 0.2, -0.1+rand.nextDouble()*0.2, b, 0, world.getBlockMetadata(x, y, z), file, px, py, mod));
 		}
 		return true;
 	}
@@ -369,7 +372,7 @@ public final class ReikaRenderHelper extends DragonAPICore {
 			double overy = py+ReikaModelledBreakFX.pw-p[2];
 			if (overy > 0)
 				py -= overy;
-			eff.addEffect(new ReikaModelledBreakFX(world, x+rand.nextDouble(), y+rand.nextDouble(), z+rand.nextDouble(), -1+rand.nextDouble()*2, 2, -1+rand.nextDouble()*2, b, 0, world.getBlockMetadata(x, y, z), texture, px, py, mod));
+			eff.addEffect(new ReikaModelledBreakFX(world, x+rand.nextDouble(), y+rand.nextDouble(), z+rand.nextDouble(), -0.1+rand.nextDouble()*0.2, 0.2, -0.1+rand.nextDouble()*0.2, b, 0, world.getBlockMetadata(x, y, z), texture, px, py, mod));
 		}
 		return true;
 	}
@@ -395,7 +398,7 @@ public final class ReikaRenderHelper extends DragonAPICore {
 			double overy = py+ReikaModelledBreakFX.pw-p[2];
 			if (overy > 0)
 				py -= overy;
-			eff.addEffect(new ReikaModelledBreakFX(world, x+rand.nextDouble(), y+rand.nextDouble(), z+rand.nextDouble(), -1+rand.nextDouble()*2, 2, -1+rand.nextDouble()*2, b, 0, world.getBlockMetadata(x, y, z), texture, px, py, mod));
+			eff.addEffect(new ReikaModelledBreakFX(world, x+rand.nextDouble(), y+rand.nextDouble(), z+rand.nextDouble(), -0.1+rand.nextDouble()*0.2, 0.2, -0.1+rand.nextDouble()*0.2, b, 0, world.getBlockMetadata(x, y, z), texture, px, py, mod));
 		}
 		return true;
 	}
@@ -432,12 +435,12 @@ public final class ReikaRenderHelper extends DragonAPICore {
 	public static void rerenderAllChunksLazily() {
 		World world = Minecraft.getMinecraft().theWorld;
 		EntityPlayer ep = Minecraft.getMinecraft().thePlayer;
-		int r = 192;
+		int r = 512;
 		int x1 = MathHelper.floor_double(ep.posX-r);
 		int x2 = MathHelper.floor_double(ep.posX+r);
 		int z1 = MathHelper.floor_double(ep.posZ-r);
 		int z2 = MathHelper.floor_double(ep.posZ+r);
-		world.markBlockRangeForRenderUpdate(x1, 0, z1, x2, world.provider.getHeight()-1, z2);
+		Minecraft.getMinecraft().renderGlobal.markBlocksForUpdate(x1, 0, z1, x2, world.provider.getHeight()-1, z2);
 	}
 
 	public static int getFPS() {
@@ -1428,8 +1431,11 @@ public final class ReikaRenderHelper extends DragonAPICore {
 	}
 
 	public static void renderCropTypeTex(IBlockAccess world, int x, int y, int z, IIcon ico, Tessellator v5, RenderBlocks rb, double space, double h) {
-		ico = rb.getIconSafe(ico);
+		renderCropTypeTex(world, x, y, z, ico, v5, rb, space, h, 0.5);
+	}
 
+	public static void renderCropTypeTex(IBlockAccess world, int x, int y, int z, IIcon ico, Tessellator v5, RenderBlocks rb, double space, double h, double s) {
+		ico = rb.getIconSafe(ico);
 		float u = ico.getMinU();
 		float du = ico.getMaxU();
 		float v = ico.getMinV();
@@ -1437,8 +1443,8 @@ public final class ReikaRenderHelper extends DragonAPICore {
 
 		double d7 = x+0.5D-space;
 		double d8 = x+0.5D+space;
-		double d9 = z+0.5D-0.5D;
-		double d10 = z+0.5D+0.5D;
+		double d9 = z+0.5D-s;
+		double d10 = z+0.5D+s;
 
 		double dy = y-0.0625;
 
@@ -1458,8 +1464,8 @@ public final class ReikaRenderHelper extends DragonAPICore {
 		v5.addVertexWithUV(d8, dy+0, d9, u, dv);
 		v5.addVertexWithUV(d8, dy+0, d10, du, dv);
 		v5.addVertexWithUV(d8, dy+h, d10, du, v);
-		d7 = x+0.5D-0.5D;
-		d8 = x+0.5D+0.5D;
+		d7 = x+0.5D-s;
+		d8 = x+0.5D+s;
 		d9 = z+0.5D-space;
 		d10 = z+0.5D+space;
 		v5.addVertexWithUV(d7, dy+h, d9, u, v);
@@ -1562,14 +1568,14 @@ public final class ReikaRenderHelper extends DragonAPICore {
 	public static void renderBlockSubCube(int x, int y, int z, double dx, double dy, double dz, double sx, double sy, double sz, Tessellator v5, RenderBlocks rb, Block b, int meta) {
 		boolean flag = rb.renderAllFaces;
 		rb.renderAllFaces = true;
-		rb.renderMinX = dx/16;
-		rb.renderMinY = dy/16;
-		rb.renderMinZ = dz/16;
-		rb.renderMaxX = rb.renderMinX+sx/16;
-		rb.renderMaxY = rb.renderMinY+sy/16;
-		rb.renderMaxZ = rb.renderMinZ+sz/16;
+		rb.renderMinX = dx/16+0.001; //offset is to force light from center
+		rb.renderMinY = dy/16+0.001;
+		rb.renderMinZ = dz/16+0.001;
+		rb.renderMaxX = rb.renderMinX+sx/16-0.001;
+		rb.renderMaxY = rb.renderMinY+sy/16-0.001;
+		rb.renderMaxZ = rb.renderMinZ+sz/16-0.001;
 		rb.partialRenderBounds = true;
-		rb.renderStandardBlockWithAmbientOcclusion(b, x, y, z, 1, 1, 1);
+		rb.renderStandardBlockWithColorMultiplier(b, x, y, z, 1, 1, 1);
 		rb.setRenderBounds(0, 0, 0, 1, 1, 1);
 		rb.renderAllFaces = flag;
 	}
@@ -1773,8 +1779,6 @@ public final class ReikaRenderHelper extends DragonAPICore {
 	}
 
 	private static void exportFramebuffer(Framebuffer fb, int pass, ShaderProgram p) {
-		if (!p.identifier.contains("reika"))
-			return;
 		try {
 			File root = new File(Minecraft.getMinecraft().mcDataDir, "FramebufferExport");
 			String name = pass == -1 ? p.identifier+"_end" : pass == 0 ? p.identifier+"_begin" : p.identifier+"_c_pass_"+pass;
@@ -1912,6 +1916,20 @@ public final class ReikaRenderHelper extends DragonAPICore {
 			height = h;
 		}
 
+	}
+
+	public static void rockScreen(int ticks) {
+		Minecraft.getMinecraft().renderViewEntity.hurtTime = Math.max(Minecraft.getMinecraft().renderViewEntity.hurtTime, ticks);
+	}
+
+	public static ItemStack getBlockItem(Block bk, int meta) {
+		return getBlockItem(bk, meta, null);
+	}
+
+	public static ItemStack getBlockItem(Block bk, int meta, TileEntity te) {
+		if (bk instanceof BlockTileEnum)
+			return ((BlockTileEnum)bk).getMapping(meta).getCraftedProduct(te);
+		return (ItemStack)ReikaObfuscationHelper.invoke("createStackedBlock", bk, meta);
 	}
 
 }

@@ -9,9 +9,7 @@
  ******************************************************************************/
 package Reika.DragonAPI.Auxiliary.Trackers;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -69,18 +67,14 @@ public class PackModificationTracker {
 			if (!f.exists())
 				this.createDataFile(f, mod);
 
-			try(BufferedReader p = ReikaFileReader.getReader(f, Charsets.UTF_8)) {
-				String line = "";
-				while (line != null) {
-					line = p.readLine();
-					if (line != null && !line.isEmpty() && !line.startsWith("//")) {
-						PackModification entry = this.parseString(line);
-						if (entry != null) {
-							this.addEntry(mod, entry);
-						}
-						else {
-							throw new IllegalArgumentException("Invalid modification entry formatting: '"+line+"'");
-						}
+			for (String line : ReikaFileReader.getFileAsLines(f, true, Charsets.UTF_8)) {
+				if (line != null && !line.isEmpty() && !line.startsWith("//")) {
+					PackModification entry = this.parseString(line);
+					if (entry != null) {
+						this.addEntry(mod, entry);
+					}
+					else {
+						throw new IllegalArgumentException("Invalid modification entry formatting: '"+line+"'");
 					}
 				}
 			}
@@ -108,9 +102,8 @@ public class PackModificationTracker {
 		return new File(cfg.getConfigFolder(), this.getBasicSaveFileName(mod));
 	}
 
-	private void createDataFile(File f, DragonAPIMod mod) throws Exception {
-		f.createNewFile();
-		PrintWriter p = new PrintWriter(f);
+	private boolean createDataFile(File f, DragonAPIMod mod) throws Exception {
+		ArrayList<String> p = new ArrayList();
 		this.writeCommentLine(p, "-------------------------------");
 		this.writeCommentLine(p, " "+mod.getDisplayName()+" Pack Modification Log File ");
 		this.writeCommentLine(p, "-------------------------------");
@@ -131,12 +124,11 @@ public class PackModificationTracker {
 		this.writeCommentLine(p, "\tAny changes not explained here will be assumed to be intentionally hidden, and");
 		this.writeCommentLine(p, "\tyou will lose permission to make the changes.");
 		this.writeCommentLine(p, "====================================================================================");
-		p.append("\n");
-		p.close();
+		return ReikaFileReader.writeLinesToFile(f, p, true, Charsets.UTF_8);
 	}
 
-	private static void writeCommentLine(PrintWriter p, String line) {
-		p.append("// "+line+"\n");
+	private static void writeCommentLine(ArrayList<String> li, String line) {
+		li.add("// "+line);
 	}
 
 	private PackModification parseString(String s) throws Exception {

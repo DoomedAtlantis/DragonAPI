@@ -11,7 +11,6 @@ package Reika.DragonAPI.Instantiable.IO;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
 import com.mojang.authlib.GameProfile;
 
@@ -34,7 +34,6 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.common.config.Property.Type;
 
-import Reika.DragonAPI.DragonAPICore;
 import Reika.DragonAPI.Base.DragonAPIMod;
 import Reika.DragonAPI.Exception.InvalidConfigException;
 import Reika.DragonAPI.Exception.MisuseException;
@@ -67,7 +66,7 @@ public class ControlledConfig {
 
 	private static final HashMap<String, ControlledConfig> configs = new HashMap();
 
-	private static final int userHash = genUserHash();
+	private static final UserHash userHash = genUserHash();
 
 	private final class PropertyComparator implements Comparator<String> {
 
@@ -175,7 +174,7 @@ public class ControlledConfig {
 		}
 	}
 
-	private static int genUserHash() {
+	private static UserHash genUserHash() {
 		/*
 		String username = System.getProperty("user.name");
 		long diskSize = new File("/").getTotalSpace();
@@ -183,27 +182,31 @@ public class ControlledConfig {
 		int h2 = Long.toHexString(diskSize).hashCode();
 		return h1 ^ h2;
 		 */
-		return FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? getClientUserHash() : 0;
+		return FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? getClientUserHash() : null;
 	}
 
 	@SideOnly(Side.CLIENT)
-	private static int getClientUserHash() {
+	private static UserHash getClientUserHash() {
 		Session s = Minecraft.getMinecraft().getSession();
 		GameProfile p = s.func_148256_e();
 		String id = p != null ? p.getId().toString() : s.getUsername();
-		return id.hashCode();
+		return new UserHash(id);
 	}
 
 	private String getLabel(ConfigList cfg) {
 		String s = cfg.getLabel();
 		if (cfg instanceof UserSpecificConfig && ((UserSpecificConfig)cfg).isUserSpecific()) {
-			s = "["+Character.toUpperCase(s.charAt(0))+this.getUserHash(s)+"] "+s; //First char prefix is to keep original sorting
+			s = "["+Character.toUpperCase(s.charAt(0))+this.getUserHash(s)+"]U "+s; //First char prefix is to keep original sorting
 		}
 		return s;
 	}
 
 	public static String getUserHash(String s) {
-		return Strings.padStart(Integer.toHexString(userHash - s.hashCode()).toUpperCase(Locale.ENGLISH), 8, '0');
+		int hash = userHash == null ? 0 : userHash.hash;
+		String ret = Strings.padStart(Integer.toHexString(hash - s.hashCode()).toUpperCase(Locale.ENGLISH), 8, '0');
+		if (userHash != null)
+			ret = ret+"_"+(userHash.userID.indexOf('-') == -1 ? userHash.userID : userHash.userID.substring(0, 6));
+		return ret;
 	}
 
 	private void registerOption(String s1, String s2, Object cfg) {
@@ -262,47 +265,6 @@ public class ControlledConfig {
 
 	public int getOtherID(int i) {
 		return otherIDs[i];
-	}
-
-	private boolean checkReset(Configuration config) {
-		//readID = config.get("Control", "Config ID - Edit to have your config auto-deleted", CURRENT_CONFIG_ID).getInt();
-		//return readID != CURRENT_CONFIG_ID;
-		return false;
-	}
-
-	protected final void resetConfigFile() {
-		String path = this.getConfigPath()+"_Old_Config_Backup.txt";
-		File backup = new File(path);
-		if (backup.exists())
-			backup.delete();
-		try {
-			DragonAPICore.log(configMod.getDisplayName().toUpperCase()+": Writing Backup File to "+path);
-			DragonAPICore.log(configMod.getDisplayName().toUpperCase()+": Use this to restore custom IDs if necessary.");
-			backup.createNewFile();
-			if (!backup.exists())
-				DragonAPICore.logError(configMod.getDisplayName().toUpperCase()+": Could not create backup file at "+path+"!");
-			else {
-				PrintWriter p = new PrintWriter(backup);
-				p.println("#####----------THESE ARE ALL THE OLD CONFIG SETTINGS YOU WERE USING----------#####");
-				p.println("#####---IF THEY DIFFER FROM THE DEFAULTS, YOU MUST RE-EDIT THE CONFIG FILE---#####");
-
-				p.close();
-			}
-		}
-		catch (IOException e) {
-			DragonAPICore.logError(configMod.getDisplayName().toUpperCase()+": Could not create backup file due to IOException!");
-			e.printStackTrace();
-		}
-		configFile.delete();
-	}
-
-	private void versionCheck(FMLPreInitializationEvent event) {
-		if (this.checkReset(config)) {
-			DragonAPICore.log(configMod.getDisplayName().toUpperCase()+": Config File Format Changed. Resetting...");
-			this.resetConfigFile();
-			this.initProps(event);
-			return;
-		}
 	}
 
 	public void loadCustomConfigFile(FMLPreInitializationEvent event, String file) {
@@ -447,7 +409,7 @@ public class ControlledConfig {
 			else {
 				HashSet<String> entryNames = new HashSet();
 				for (String s2 : cat.getValues().keySet()) {
-					if (!map.containsKey(s2)) {
+					if (s2.charAt(0) != '[' && !s2.contains("]U") && !map.containsKey(s2)) { //skip user-specific ones
 						entryNames.add(s2);
 					}
 				}
@@ -567,7 +529,7 @@ public class ControlledConfig {
 						f.delete();
 					f.createNewFile();
 					if (f.exists()) {
-						ReikaFileReader.writeLinesToFile(f, li, true);
+						ReikaFileReader.writeLinesToFile(f, li, true, Charsets.UTF_8);
 					}
 				}
 			}
@@ -616,7 +578,7 @@ public class ControlledConfig {
 	}
 
 	private void readData(HashMap<String, String> map, File f) {
-		ArrayList<String> li = ReikaFileReader.getFileAsLines(f, true);
+		List<String> li = ReikaFileReader.getFileAsLines(f, true, Charsets.UTF_8);
 		for (String s : li) {
 			if (s.startsWith("[")) {
 				int min = s.indexOf('"');
@@ -847,6 +809,10 @@ public class ControlledConfig {
 			return data;
 		}
 
+		public void setData(C val) {
+			data = val;
+		}
+
 		@Override
 		public String toString() {
 			return this.category+":"+this.name+" > "+this.data.toString();
@@ -876,5 +842,17 @@ public class ControlledConfig {
 		for (ControlledConfig c : configs.values()) {
 			c.reload();
 		}
+	}
+
+	private static class UserHash {
+
+		private final String userID;
+		private final int hash;
+
+		private UserHash(String id) {
+			userID = id;
+			hash = id.hashCode();
+		}
+
 	}
 }

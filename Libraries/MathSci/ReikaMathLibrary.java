@@ -408,6 +408,14 @@ public final class ReikaMathLibrary extends DragonAPICore {
 	}
 
 	public static double linterpolate(double x, double x1, double x2, double y1, double y2) {
+		return linterpolate(x, x1, x2, y1, y2, false);
+	}
+
+	public static double linterpolate(double x, double x1, double x2, double y1, double y2, boolean clamp) {
+		if (clamp && x <= x1)
+			return y1;
+		if (clamp && x >= x2)
+			return y2;
 		return y1+(x-x1)/(x2-x1)*(y2-y1);
 	}
 
@@ -568,5 +576,15 @@ public final class ReikaMathLibrary extends DragonAPICore {
 		if (dec == 0)
 			return 0;
 		return String.valueOf(dec).split("\\.")[1].length();
+	}
+
+	public static int sumDigits(long val) {
+		val = Math.abs(val);
+		int sum = 0;
+		while (val > 0) {
+			sum += (int)(val%10);
+			val /= 10;
+		}
+		return sum;
 	}
 }

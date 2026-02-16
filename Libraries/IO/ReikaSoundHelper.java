@@ -29,6 +29,7 @@ import net.minecraft.client.audio.MusicTicker.MusicType;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -111,6 +112,14 @@ public class ReikaSoundHelper {
 		world.playSoundEffect(x+0.5, y+0.5, z+0.5, snd, 1, 1);
 	}
 
+	public static void playSoundAtBlock(TileEntity te, String snd) {
+		playSoundAtBlock(te, snd, 1, 1);
+	}
+
+	public static void playSoundAtBlock(TileEntity te, String snd, float v, float p) {
+		playSoundAtBlock(te.worldObj, te.xCoord, te.yCoord, te.zCoord, snd, v, p);
+	}
+
 	public static void playSound(SoundEnum s, World world, Entity e, float vol, float pitch) {
 		playSound(s, world, e.posX, e.posY, e.posZ, vol, pitch);
 	}
@@ -144,6 +153,11 @@ public class ReikaSoundHelper {
 	}
 
 	@SideOnly(Side.CLIENT)
+	public static ISound playClientSound(SoundEnum s, TileEntity te, float vol, float pitch) {
+		return playClientSound(s, te.xCoord+0.5, te.yCoord+0.5, te.zCoord+0.5, vol, pitch, true);
+	}
+
+	@SideOnly(Side.CLIENT)
 	public static ISound playClientSound(SoundEnum s, double x, double y, double z, float vol, float pitch) {
 		return playClientSound(s, x, y, z, vol, pitch, true);
 	}
@@ -174,6 +188,11 @@ public class ReikaSoundHelper {
 	}
 
 	@SideOnly(Side.CLIENT)
+	public static ISound playClientSound(SoundEnum s, TileEntity e, float vol, float pitch, boolean att) {
+		return playClientSound(s, e.xCoord, e.yCoord, e.zCoord, vol, pitch, att);
+	}
+
+	@SideOnly(Side.CLIENT)
 	public static void playClientSound(SoundEnum s, Entity e, float vol, float pitch) {
 		playClientSound(s, e.posX, e.posY, e.posZ, vol, pitch, true);
 	}
@@ -188,11 +207,31 @@ public class ReikaSoundHelper {
 			throw new MisuseException("You cannot call this from the client!");
 		World[] worlds = DimensionManager.getWorlds();
 		for (World world : worlds) {
-			for (EntityPlayer ep : (List<EntityPlayer>)world.playerEntities) {
-				playSound(s, world, ep, vol, pitch);
-			}
+			broadcastSound(s, vol, pitch, world, 0, 0, 0);
 		}
 
+	}
+
+	public static void broadcastSound(SoundEnum s, float vol, float pitch, World world, double posX, double posY, double posZ) {
+		for (EntityPlayer ep : (List<EntityPlayer>)world.playerEntities) {
+			s.playSound(world, posX, posY, posZ, vol, pitch, false);//playSound(s, world, ep, vol, pitch);
+		}
+	}
+
+	public static void broadcastSound(String s, float vol, float pitch) {
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+			throw new MisuseException("You cannot call this from the client!");
+		World[] worlds = DimensionManager.getWorlds();
+		for (World world : worlds) {
+			broadcastSound(s, vol, pitch, world, 0, 0, 0);
+		}
+
+	}
+
+	public static void broadcastSound(String s, float vol, float pitch, World world, double posX, double posY, double posZ) {
+		for (EntityPlayer ep : (List<EntityPlayer>)world.playerEntities) {
+			playSoundFromServer(world, posX, posY, posZ, s, vol, pitch, false);
+		}
 	}
 
 	public static void playSoundAtEntity(World world, Entity e, String snd) {
@@ -203,8 +242,8 @@ public class ReikaSoundHelper {
 		world.playSoundEffect(e.posX, e.posY, e.posZ, snd, vol, p);
 	}
 
-	public static void playSoundFromServer(World world, double x, double y, double z, String name, float vol, float pitch, boolean scale) {
-		ReikaPacketHelper.writeDirectSound(DragonAPIInit.packetChannel, PacketIDs.SERVERSOUND.ordinal(), world, x, y, z, name, vol, pitch, scale);
+	public static void playSoundFromServer(World world, double x, double y, double z, String name, float vol, float pitch, boolean atten) {
+		ReikaPacketHelper.writeDirectSound(DragonAPIInit.packetChannel, PacketIDs.SERVERSOUND.ordinal(), world, x, y, z, name, vol, pitch, atten);
 	}
 
 	public static void playSoundFromServerAtBlock(World world, int x, int y, int z, String name, float vol, float pitch, boolean scale) {

@@ -31,7 +31,7 @@ public class ImagedGuiButton extends GuiButton {
 	private int color;
 	private boolean shadow = true;
 	private String filepath;
-	protected final boolean hasToolTip;
+	protected boolean hasToolTip;
 	protected final Class modClass;
 
 	public String sound = "gui.button.press";
@@ -53,6 +53,7 @@ public class ImagedGuiButton extends GuiButton {
 	public float hoverFadeSpeedUp = 0.08F;
 	public float hoverFadeSpeedDown = 0.15F;
 	private int ticks = 0;
+	private boolean isClicked;
 
 	public IIcon icon = null;
 	public int iconWidth = width;
@@ -147,6 +148,12 @@ public class ImagedGuiButton extends GuiButton {
 		return this;
 	}
 
+	public ImagedGuiButton setTooltip(String s) {
+		displayString = s;
+		hasToolTip = true;
+		return this;
+	}
+
 	protected final String getButtonTexture() {
 		return filepath;
 	}
@@ -188,6 +195,9 @@ public class ImagedGuiButton extends GuiButton {
 				this.onHoverTo();
 			}
 
+			if (!field_146123_n)
+				isClicked = false;
+
 			lastHover = field_146123_n;
 			hoverTicks = lastHover ? hoverTicks+1 : 0;
 			if (lastHover) {
@@ -198,10 +208,20 @@ public class ImagedGuiButton extends GuiButton {
 			}
 			ticks++;
 		}
+		else {
+			isClicked = false;
+		}
+		if (!enabled)
+			isClicked = false;
 	}
 
 	protected void updateVisibility() {
 
+	}
+
+	@Override
+	public final void mouseReleased(int x, int y) {
+		isClicked = false;
 	}
 
 	protected void renderButton() {
@@ -213,7 +233,20 @@ public class ImagedGuiButton extends GuiButton {
 
 	@Override
 	public final boolean mousePressed(Minecraft mc, int x, int y) {
-		return enabled && visible && this.isPositionWithin(x, y);
+		if (visible && this.isPositionWithin(x, y)) {
+			if (enabled) {
+				isClicked = true;
+				return true;
+			}
+			else {
+				this.onFailedClick();
+			}
+		}
+		return false;
+	}
+
+	protected void onFailedClick() {
+
 	}
 
 	protected boolean isPositionWithin(int mx, int my) {
@@ -246,9 +279,14 @@ public class ImagedGuiButton extends GuiButton {
 
 	@Override
 	public void drawTexturedModalRect(int x, int y, int u, int v, int w, int h) {
+		this.drawTexturedModalRect(x, y, u, v, w, h, 0xffffff, 255);
+	}
+
+	public void drawTexturedModalRect(int x, int y, int u, int v, int w, int h, int c, int a) {
 		float f = 1F/textureSize;
 		Tessellator v5 = Tessellator.instance;
 		v5.startDrawingQuads();
+		v5.setColorRGBA_I(c, a);
 		v5.addVertexWithUV(x+0, y+h, zLevel, (u+0)*f, (v+h)*f);
 		v5.addVertexWithUV(x+w, y+h, zLevel, (u+w)*f, (v+h)*f);
 		v5.addVertexWithUV(x+w, y+0, zLevel, (u+w)*f, (v+0)*f);
@@ -289,8 +327,12 @@ public class ImagedGuiButton extends GuiButton {
 		ReikaTextureHelper.bindFontTexture();
 	}
 
-	public float getHoverFade() {
+	public final float getHoverFade() {
 		return hoverFade;
+	}
+
+	public boolean isClicked() {
+		return isClicked;
 	}
 
 	public static enum TextAlign {

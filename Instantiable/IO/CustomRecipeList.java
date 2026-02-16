@@ -20,6 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
 
 import net.minecraft.block.Block;
@@ -35,7 +36,6 @@ import Reika.DragonAPI.Base.DragonAPIMod;
 import Reika.DragonAPI.IO.ReikaFileReader;
 import Reika.DragonAPI.Instantiable.IO.LuaBlock.LuaBlockDatabase;
 import Reika.DragonAPI.Instantiable.IO.LuaBlock.NBTLuaBlock;
-import Reika.DragonAPI.Libraries.ReikaNBTHelper;
 import Reika.DragonAPI.Libraries.ReikaRecipeHelper;
 import Reika.DragonAPI.Libraries.Java.ReikaJavaLibrary;
 import Reika.DragonAPI.Libraries.Registry.ReikaItemHelper;
@@ -121,7 +121,7 @@ public class CustomRecipeList {
 		try {
 			File f = new File(this.getBaseFilepath(), "example"+this.getExtension());
 			f.createNewFile();
-			ReikaFileReader.writeLinesToFile(f, exampleBlock.writeToStrings(), true);
+			ReikaFileReader.writeLinesToFile(f, exampleBlock.writeToStrings(), true, Charsets.UTF_8);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -275,8 +275,8 @@ public class CustomRecipeList {
 
 		ret = ReikaItemHelper.getSizedItemStack(ret, amt);
 
-		if (ret != null && nbt != null) {
-			ret.stackTagCompound = ReikaNBTHelper.constructNBT(nbt);
+		if (ret != null && nbt != null && !nbt.isEmpty()) {
+			ret.stackTagCompound = nbt.asNBT();
 		}
 
 		if (ret == null && !tolerateNull) {

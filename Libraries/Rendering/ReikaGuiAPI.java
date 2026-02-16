@@ -211,7 +211,7 @@ public final class ReikaGuiAPI extends GuiScreen {
 	}
 
 	public void drawLine(double x, double y, double x2, double y2, int color, LineType type) {
-		if (GL11.glGetFloat(GL11.GL_LINE_WIDTH) < 1.5F)
+		if (type != LineType.THIN && GL11.glGetFloat(GL11.GL_LINE_WIDTH) < 1.5F)
 			GL11.glLineWidth(1.5F);
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		int alpha = ReikaColorAPI.getAlpha(color);
@@ -222,7 +222,10 @@ public final class ReikaGuiAPI extends GuiScreen {
 		int blue = ReikaColorAPI.getBlue(color);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		//GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(GL11.GL_BLEND);
+		if (alpha == 255)
+			GL11.glDisable(GL11.GL_BLEND);
+		else
+			GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		if (type != LineType.SOLID) {
 			type.setMode(2);
@@ -408,6 +411,10 @@ public final class ReikaGuiAPI extends GuiScreen {
 
 	/** Note that this must be called after any and all texture and text rendering, as the lighting conditions are left a bit off */
 	public void drawItemStack(RenderItem renderer, FontRenderer fr, ItemStack is, int x, int y) {
+		this.drawItemStack(renderer, fr, is, x, y, false);
+	}
+
+	public void drawItemStack(RenderItem renderer, FontRenderer fr, ItemStack is, int x, int y, boolean forceStackSize) {
 		FontRenderer font = null;
 		if (is == null)
 			return;
@@ -438,7 +445,7 @@ public final class ReikaGuiAPI extends GuiScreen {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		renderer.renderItemAndEffectIntoGUI(font, mc.renderEngine, is, x, y);
-		renderer.renderItemOverlayIntoGUI(font, mc.renderEngine, is, x, y, null);
+		renderer.renderItemOverlayIntoGUI(font, mc.renderEngine, is, x, y, forceStackSize ? String.valueOf(is.stackSize) : null);
 
 		if (cacheRenders)
 			items.addRegionByWH(x, y, 16, 16, is.copy());
@@ -476,12 +483,13 @@ public final class ReikaGuiAPI extends GuiScreen {
 		GL11.glTranslatef(0.0F, 0.0F, -64.0F);
 	}
 
-	public void drawMultilineTooltip(List<String> li, int x, int y) {
+	public void drawMultilineTooltip(List<String> li, int x, int y, int spacing, boolean center) {
 		GL11.glTranslatef(0.0F, 0.0F, 64.0F);
 		int dy = y;
 		for (String s : li) {
-			this.drawTooltipAt(mc.fontRenderer, s, x, dy);
-			dy += 17;
+			int dx = center ? x+mc.fontRenderer.getStringWidth(s)/2 : x;
+			this.drawTooltipAt(mc.fontRenderer, s, dx, dy);
+			dy += spacing;
 		}
 		GL11.glTranslatef(0.0F, 0.0F, -64.0F);
 	}
@@ -491,7 +499,7 @@ public final class ReikaGuiAPI extends GuiScreen {
 			List<String> li = new ArrayList();
 			li.add(is.getDisplayName());
 			is.getItem().addInformation(is, Minecraft.getMinecraft().thePlayer, li, true);
-			this.drawMultilineTooltip(li, x, y);
+			this.drawMultilineTooltip(li, x, y, 17, false);
 		}
 	}
 
@@ -510,10 +518,12 @@ public final class ReikaGuiAPI extends GuiScreen {
 	public void drawTooltipAt(FontRenderer f, String s, int mx, int my) {
 		if (s == null)
 			s = "[null]";
+		GL11.glPushMatrix();
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_BLEND);
+		//GL11.glDepthMask(false);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		int k = f.getStringWidth(DelegateFontRenderer.stripFlags(s));
 		int j2 = mx + 12;
@@ -544,6 +554,7 @@ public final class ReikaGuiAPI extends GuiScreen {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		f.drawStringWithShadow(s, j2, k2, 0xffffffff);
 		GL11.glPopAttrib();
+		GL11.glPopMatrix();
 
 		if (cacheRenders)
 			tooltips.addItem(s, mx, my+8, f.getStringWidth(s)+24, f.FONT_HEIGHT+8);

@@ -1,8 +1,8 @@
 /*******************************************************************************
  * @author Reika Kalseki
- * 
+ *
  * Copyright 2017
- * 
+ *
  * All rights reserved.
  * Distribution of the software in any form is only allowed with
  * explicit, prior permission from the owner.
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.util.EnumChatFormatting;
@@ -31,7 +32,7 @@ public final class PatreonController {
 
 	public static final PatreonController instance = new PatreonController();
 
-	public static final String reikaURL = "http://server.techjargaming.com/Reika/Donator/patreon_";
+	public static final String reikaURL = "https://reikasminecraft.overminddl1.com/Donator/patreon_";
 
 	private final HashMap<String, Patrons> data = new HashMap();
 
@@ -47,14 +48,14 @@ public final class PatreonController {
 			return;
 		}
 		DonatorFile f = new DonatorFile(dev);
-		ArrayList<String> lines = ReikaFileReader.getFileAsLines(file, 10000, false, f);
+		List<String> lines = ReikaFileReader.getFileAsLines(file, 10000, false, f);
 		if (lines != null) {
 			DragonAPICore.log("Loading "+lines.size()+" patrons for "+dev);
 			this.addPatrons(dev, lines);
 		}
 	}
 
-	private void addPatrons(String dev, ArrayList<String> lines) {
+	private void addPatrons(String dev, List<String> lines) {
 		for (String s : lines) {
 			s = ReikaStringParser.stripSpaces(s);
 			try {
@@ -116,6 +117,11 @@ public final class PatreonController {
 		@Override
 		public void onTimedOut() {
 			DragonAPICore.logError("Error accessing online file: Timed Out");
+		}
+
+		@Override
+		public void onCertificateFailed() {
+			DragonAPICore.logError("Error accessing online file: Your HTTP certificate is invalid!");
 		}
 
 	}

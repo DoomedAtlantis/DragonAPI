@@ -55,7 +55,7 @@ import Reika.DragonAPI.Auxiliary.ModularLogger.ModularLoggerCommand;
 import Reika.DragonAPI.Auxiliary.NEI_DragonAPI_Config;
 import Reika.DragonAPI.Auxiliary.ProgressiveRecursiveBreaker;
 import Reika.DragonAPI.Auxiliary.RainTicker;
-import Reika.DragonAPI.Auxiliary.RebootScheduler;
+import Reika.DragonAPI.Auxiliary.VillageTradeHandler;
 import Reika.DragonAPI.Auxiliary.Trackers.ChunkPregenerator;
 import Reika.DragonAPI.Auxiliary.Trackers.CommandableUpdateChecker;
 import Reika.DragonAPI.Auxiliary.Trackers.CommandableUpdateChecker.CheckerDisableCommand;
@@ -85,6 +85,7 @@ import Reika.DragonAPI.Base.ModHandlerBase.VersionIgnore;
 import Reika.DragonAPI.Command.ClearParticlesCommand;
 import Reika.DragonAPI.Command.DragonClientCommand;
 import Reika.DragonAPI.Command.DragonCommandBase;
+import Reika.DragonAPI.Command.DumpTextureBufferCommand;
 import Reika.DragonAPI.Command.ExportEnvironmentCommand;
 import Reika.DragonAPI.Command.GetLatencyCommand;
 import Reika.DragonAPI.Command.ToggleBlockChangePacketCommand;
@@ -198,10 +199,11 @@ import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "DragonAPI", version = "v@MAJOR_VERSION@@MINOR_VERSION@", certificateFingerprint = "@GET_FINGERPRINT@", dependencies=DragonAPICore.dependencies)
+@Mod(modid = "DragonAPI", version = "v@MAJOR_VERSION@@MINOR_VERSION@", acceptedMinecraftVersions = "[1.7.10]", certificateFingerprint = "@GET_FINGERPRINT@", dependencies=DragonAPICore.dependencies)
 public class DragonAPIInit extends DragonAPIMod {
 
 	public static final String packetChannel = "DragonAPIData";
@@ -263,7 +265,7 @@ public class DragonAPIInit extends DragonAPIMod {
 
 		this.initalizeVanillaOreDict();
 
-		ReikaJavaLibrary.initClass(ModList.class);
+		ReikaJavaLibrary.initClass(ModList.class, true);
 
 		this.increasePotionCount();
 		this.increaseChunkCap();
@@ -470,13 +472,16 @@ public class DragonAPIInit extends DragonAPIMod {
 		BiomeGenBase.ocean.rainfall = Math.max(1, BiomeGenBase.ocean.rainfall);
 		BiomeGenBase.deepOcean.rainfall = Math.max(1, BiomeGenBase.deepOcean.rainfall);
 
+		for (int i = 0; i < 4; i++)
+			VillagerRegistry.instance().registerVillageTradeHandler(i, VillageTradeHandler.instance);
+		for (int i : VillagerRegistry.instance().getRegisteredVillagers())
+			VillagerRegistry.instance().registerVillageTradeHandler(i, VillageTradeHandler.instance);
+
 		TickRegistry.instance.registerTickHandler(ProgressiveRecursiveBreaker.instance);
 		TickRegistry.instance.registerTickHandler(TickScheduler.instance);
 		TickRegistry.instance.registerTickHandler(ChunkPregenerator.instance);
 		if (DragonOptions.RAINTICK.getState())
 			TickRegistry.instance.registerTickHandler(RainTicker.instance);
-		if (DragonOptions.AUTOREBOOT.getValue() > 0)
-			TickRegistry.instance.registerTickHandler(RebootScheduler.instance);
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 			TickRegistry.instance.registerTickHandler(KeyTicker.instance);
 			TickRegistry.instance.registerTickHandler(new ReikaRenderHelper.RenderTick());
@@ -555,11 +560,11 @@ public class DragonAPIInit extends DragonAPIMod {
 
 		//CreativeTabSorter.instance.sortTabs(); //frequently messes up
 
-		ReikaJavaLibrary.initClass(FrameBlacklist.class);
-		ReikaJavaLibrary.initClass(ReikaMystcraftHelper.class);
-		ReikaJavaLibrary.initClass(ReikaThaumHelper.class);
-		ReikaJavaLibrary.initClass(SmelteryRecipeHandler.class);
-		ReikaJavaLibrary.initClass(TwilightForestLootHooks.class);
+		ReikaJavaLibrary.initClass(FrameBlacklist.class, true);
+		ReikaJavaLibrary.initClass(ReikaMystcraftHelper.class, true);
+		ReikaJavaLibrary.initClass(ReikaThaumHelper.class, true);
+		ReikaJavaLibrary.initClass(SmelteryRecipeHandler.class, true);
+		ReikaJavaLibrary.initClass(TwilightForestLootHooks.class, true);
 
 		if (ModList.APPENG.isLoaded()) {
 			MESystemReader.registerEffectHandler();
@@ -574,6 +579,7 @@ public class DragonAPIInit extends DragonAPIMod {
 			ClientCommandHandler.instance.registerCommand(new GetLatencyCommand());
 			ClientCommandHandler.instance.registerCommand(new ClearParticlesCommand());
 			ClientCommandHandler.instance.registerCommand(new ExportEnvironmentCommand());
+			ClientCommandHandler.instance.registerCommand(new DumpTextureBufferCommand());
 		}
 
 		if (DragonOptions.BIOMEFIRE.getState()) {
@@ -779,11 +785,11 @@ public class DragonAPIInit extends DragonAPIMod {
 		if (!this.registerHandler(ModList.HEXCRAFT, HexBlockHandler.class, "Block Handler", new ClassVersionHandler("com.celestek.hexcraft.api.WorldGenColors")))
 			this.registerHandler(ModList.HEXCRAFT, HexBlockHandlerSimple.class, "Block Handler");
 
-		ReikaJavaLibrary.initClass(ModOreList.class);
-		ReikaJavaLibrary.initClass(ModWoodList.class);
-		ReikaJavaLibrary.initClass(ModCropList.class);
-		ReikaJavaLibrary.initClass(PowerTypes.class);
-		ReikaJavaLibrary.initClass(InterfaceCache.class);
+		ReikaJavaLibrary.initClass(ModOreList.class, true);
+		ReikaJavaLibrary.initClass(ModWoodList.class, true);
+		ReikaJavaLibrary.initClass(ModCropList.class, true);
+		ReikaJavaLibrary.initClass(PowerTypes.class, true);
+		ReikaJavaLibrary.initClass(InterfaceCache.class, true);
 	}
 
 	@EventHandler
@@ -800,6 +806,7 @@ public class DragonAPIInit extends DragonAPIMod {
 	@EventHandler
 	public void singlePlayerLogout(FMLServerStoppedEvent evt) {
 		ReikaPlayerAPI.clearHeadCache();
+		DragonAPIEventWatcher.instance.clearCaches();
 		if (evt.getSide() == Side.CLIENT) {
 			MinecraftForge.EVENT_BUS.post(new SinglePlayerLogoutEvent());
 		}
@@ -841,8 +848,8 @@ public class DragonAPIInit extends DragonAPIMod {
 	}
 
 	private void initHandler(ModList mod, Class<? extends ModHandlerBase> c, String id) throws Exception {
-		ReikaJavaLibrary.initClass(c);
-		Method inst = c.getMethod("getInstance", null);
+		ReikaJavaLibrary.initClass(c, true);
+		Method inst = c.getMethod("getInstance");
 		ModHandlerBase h = (ModHandlerBase)inst.invoke(null);
 		mod.registerHandler(h, id);
 	}

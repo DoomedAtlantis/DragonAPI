@@ -24,8 +24,13 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map.Entry;
 import java.util.UUID;
+
+import com.google.common.base.Charsets;
+import com.google.common.base.Strings;
 
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,6 +47,7 @@ import Reika.DragonAPI.Auxiliary.PopupWriter;
 import Reika.DragonAPI.Base.DragonAPIMod;
 import Reika.DragonAPI.Command.DragonCommandBase;
 import Reika.DragonAPI.Extras.ModVersion;
+import Reika.DragonAPI.Extras.ModVersion.ErroredVersion;
 import Reika.DragonAPI.IO.ReikaFileReader;
 import Reika.DragonAPI.IO.ReikaFileReader.ConnectionErrorHandler;
 import Reika.DragonAPI.IO.ReikaFileReader.DataFetcher;
@@ -65,12 +71,12 @@ public final class CommandableUpdateChecker {
 
 	public static final CommandableUpdateChecker instance = new CommandableUpdateChecker();
 
-	public static final String reikaURL = "http://server.techjargaming.com/Reika/versions";
+	public static final String reikaURL = "https://reikasminecraft.overminddl1.com/versions";
 
 	private final HashMap<DragonAPIMod, ModVersion> latestVersions = new OneWayMap();
 	private final Collection<UpdateChecker> checkers = new OneWayList();
 	private final Collection<DragonAPIMod> oldMods = new OneWayList();
-	private final Collection<DragonAPIMod> noURLMods = new OneWayList();
+	private final HashMap<DragonAPIMod, String> noURLMods = new OneWayMap();
 
 	private final HashMap<String, DragonAPIMod> modNames = new OneWayMap();
 	private final HashMap<DragonAPIMod, String> modNamesReverse = new OneWayMap();
@@ -78,7 +84,7 @@ public final class CommandableUpdateChecker {
 	private final HashMap<DragonAPIMod, Boolean> overrides = new OneWayMap();
 
 	private final Collection<DragonAPIMod> dispatchedOldMods = new ArrayList();
-	private final Collection<DragonAPIMod> dispatchedURLMods = new ArrayList();
+	private final HashMap<DragonAPIMod, String> erroredMods = new HashMap();
 
 	private final HashMap<DragonAPIMod, UpdateHash> hashes = new HashMap();
 
@@ -87,41 +93,61 @@ public final class CommandableUpdateChecker {
 	}
 
 	public void checkAll() {
-		this.getOverrides();
-		for (UpdateChecker c : checkers) {
-			DragonAPIMod mod = c.mod;
-			if (this.shouldCheck(mod)) {
-				ModVersion version = c.version;
-				ModVersion latest = latestVersions.get(mod);
-				//if (version.isCompiled()) {
-				if (latest == ModVersion.timeout) {
-					this.markUpdate(mod, version, latest);
-					ReikaJavaLibrary.pConsole("-----------------------"+mod.getTechnicalName()+"-----------------------");
-					ReikaJavaLibrary.pConsole("Could not connect to version server. Please check your internet settings,");
-					ReikaJavaLibrary.pConsole("and if the server is unavailable please contact "+mod.getModAuthorName()+".");
-					ReikaJavaLibrary.pConsole("------------------------------------------------------------------------");
+		Runnable r = () -> {
+			for (UpdateChecker c : checkers) {
+				ModVersion latest = c.fetchLatestVersion();
+				if (latest == null) {
+					c.mod.getModLogger().logError("Could not access online version reference. Please notify "+c.mod.getModAuthorName());
+					return;
 				}
-				else if (version.compareTo(latest) < 0) {
-					this.markUpdate(mod, version, latest);
-					ReikaJavaLibrary.pConsole("-----------------------"+mod.getTechnicalName()+"-----------------------");
-					ReikaJavaLibrary.pConsole("This version of the mod ("+version+") is out of date.");
-					ReikaJavaLibrary.pConsole("This version is likely to contain bugs, crashes, and/or exploits.");
-					ReikaJavaLibrary.pConsole("No technical support whatsoever will be provided for this version.");
-					ReikaJavaLibrary.pConsole("Update to "+latest+" as soon as possible; there is no good reason not to.");
-					ReikaJavaLibrary.pConsole("------------------------------------------------------------------------");
-					ReikaJavaLibrary.pConsole("");
+				else {
+					c.mod.getModLogger().log("Found latest mod version: "+latest+" compared to current "+c.mod.getModVersion());
 				}
-				//}
-				//else {
-				//
-				//}
+				latestVersions.put(c.mod, latest);
 			}
-		}
+			this.getOverrides();
+			for (UpdateChecker c : checkers) {
+				DragonAPIMod mod = c.mod;
+				if (this.shouldCheck(mod)) {
+					ModVersion version = c.version;
+					ModVersion latest = latestVersions.get(mod);
+					//if (version.isCompiled()) {
+					if (latest instanceof ErroredVersion) {
+						this.markUpdate(mod, version, latest);
+						ReikaJavaLibrary.pConsole("-----------------------"+mod.getTechnicalName()+"-----------------------");
+						ReikaJavaLibrary.pConsole("Could not connect to version server. Please check your internet settings,");
+						ReikaJavaLibrary.pConsole("and if the server is unavailable please contact "+mod.getModAuthorName()+".");
+						ReikaJavaLibrary.pConsole(((ErroredVersion)latest).errorMessage);
+						ReikaJavaLibrary.pConsole("------------------------------------------------------------------------");
+					}
+					else if (version.compareTo(latest) < 0) {
+						this.markUpdate(mod, version, latest);
+						ReikaJavaLibrary.pConsole("-----------------------"+mod.getTechnicalName()+"-----------------------");
+						ReikaJavaLibrary.pConsole("This version of the mod ("+version+") is out of date.");
+						ReikaJavaLibrary.pConsole("This version is likely to contain bugs, crashes, and/or exploits.");
+						ReikaJavaLibrary.pConsole("No technical support whatsoever will be provided for this version.");
+						ReikaJavaLibrary.pConsole("Update to "+latest+" as soon as possible; there is no good reason not to.");
+						ReikaJavaLibrary.pConsole("------------------------------------------------------------------------");
+						ReikaJavaLibrary.pConsole("");
+					}
+					//}
+					//else {
+					//
+					//}
+				}
+			}
+		};
+		Thread t = new Thread(r, "DragonAPI Update Checks");
+		t.start();
 	}
 
 	private void markUpdate(DragonAPIMod mod, ModVersion version, ModVersion latest) {
-		if (latest == ModVersion.timeout) {
-			noURLMods.add(mod);
+		if (latest instanceof ErroredVersion) {
+			String s = ((ErroredVersion)latest).errorMessage;
+			int idx = s.indexOf(':');
+			if (idx > 0)
+				s = s.substring(idx+1).trim();
+			noURLMods.put(mod, s);
 		}
 		else {
 			oldMods.add(mod);
@@ -140,7 +166,7 @@ public final class CommandableUpdateChecker {
 	public void registerMod(DragonAPIMod mod) {
 		ModVersion version = mod.getModVersion();
 		if (version == ModVersion.source) {
-			mod.getModLogger().log("Mod is in source code form. Not checking versions.");
+			mod.getModLogger().log("Mod is in source code form. Not checking version.");
 			return;
 		}
 		if (mod.getUpdateCheckURL() == null)
@@ -152,12 +178,6 @@ public final class CommandableUpdateChecker {
 			return;
 		}
 		UpdateChecker c = new UpdateChecker(mod, version, file);
-		ModVersion latest = c.getLatestVersion();
-		if (latest == null) {
-			mod.getModLogger().logError("Could not access online version reference. Please notify "+mod.getModAuthorName());
-			return;
-		}
-		latestVersions.put(mod, latest);
 		checkers.add(c);
 		String label = ReikaStringParser.stripSpaces(mod.getDisplayName().toLowerCase(Locale.ENGLISH));
 		modNames.put(label, mod);
@@ -182,14 +202,14 @@ public final class CommandableUpdateChecker {
 		File f = this.getFile();
 		if (f.exists()) {
 			boolean deleteFile = false;
-			ArrayList<String> li = ReikaFileReader.getFileAsLines(f, true);
+			List<String> li = ReikaFileReader.getFileAsLines(f, true, Charsets.UTF_8);
 			for (int i = 0; i < li.size(); i++) {
 				String line = li.get(i);
 				String[] parts = line.split(":");
 				DragonAPIMod mod = modNames.get(parts[0]);
 				boolean b = Boolean.parseBoolean(parts[1]);
 				ModVersion version = ModVersion.getFromString(parts[2]);
-				if (version == ModVersion.timeout)
+				if (version instanceof ErroredVersion)
 					deleteFile = true;
 				else if (version.equals(latestVersions.get(mod)))
 					overrides.put(mod, b);
@@ -204,7 +224,7 @@ public final class CommandableUpdateChecker {
 		String name = ReikaStringParser.stripSpaces(mod.getDisplayName().toLowerCase(Locale.ENGLISH));
 		ModVersion latest = latestVersions.get(mod);
 		if (f.exists()) {
-			ArrayList<String> li = ReikaFileReader.getFileAsLines(f, true);
+			List<String> li = ReikaFileReader.getFileAsLines(f, true, Charsets.UTF_8);
 			Iterator<String> it = li.iterator();
 			while (it.hasNext()) {
 				String line = it.next();
@@ -213,11 +233,9 @@ public final class CommandableUpdateChecker {
 				}
 			}
 			li.add(name+":"+enable+":"+latest);
-			try {
-				PrintWriter p = new PrintWriter(f);
+			try(PrintWriter p = new PrintWriter(f)) {
 				for (int i = 0; i < li.size(); i++)
 					p.append(li.get(i)+"\n");
-				p.close();
 			}
 			catch (IOException e) {
 
@@ -226,7 +244,11 @@ public final class CommandableUpdateChecker {
 		else {
 			try {
 				f.createNewFile();
-				PrintWriter p = new PrintWriter(f);
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			try(PrintWriter p = new PrintWriter(f)) {
 				p.append(name+":"+enable+":"+latest);
 				p.close();
 			}
@@ -256,18 +278,18 @@ public final class CommandableUpdateChecker {
 					ReikaPacketHelper.sendStringPacket(DragonAPIInit.packetChannel, PacketIDs.OLDMODS.ordinal(), modNamesReverse.get(mod), pt);
 				}
 			}
-			for (DragonAPIMod mod : noURLMods) {
-				ReikaPacketHelper.sendStringPacket(DragonAPIInit.packetChannel, PacketIDs.OLDMODS.ordinal(), "URL_"+modNamesReverse.get(mod), pt);
+			for (Entry<DragonAPIMod, String> e : noURLMods.entrySet()) {
+				ReikaPacketHelper.sendStringPacket(DragonAPIInit.packetChannel, PacketIDs.OLDMODS.ordinal(), "URL_"+modNamesReverse.get(e.getKey())+"::"+e.getValue(), pt);
 			}
 		}
 	}
 
-	private boolean beAggressive(DragonAPIMod mod, EntityPlayerMP ep) {
+	private boolean beAggressive(DragonAPIMod mod, EntityPlayerMP ep) {/*
 		boolean abandonedPack = latestVersions.get(mod).majorVersion-mod.getModVersion().majorVersion > 1;
 		if (!abandonedPack && DragonOptions.PACKONLYUPDATE.getState()) {
 			return this.isPackMaker(mod, ep);
 		}
-		else if (DragonOptions.OPONLYUPDATE.getState()) {
+		else */if (DragonOptions.OPONLYUPDATE.getState()) {
 			return DragonAPICore.isSinglePlayer() || ReikaPlayerAPI.isAdmin(ep);
 		}
 		return true;
@@ -294,7 +316,7 @@ public final class CommandableUpdateChecker {
 
 	private UpdateHash readHash(DragonAPIMod mod) {
 		File f = this.getHashFile();
-		ArrayList<String> data = ReikaFileReader.getFileAsLines(f, true);
+		List<String> data = ReikaFileReader.getFileAsLines(f, true, Charsets.UTF_8);
 		for (String s : data) {
 			String tag = mod.getDisplayName()+"=";
 			if (s.startsWith(tag)) {
@@ -306,21 +328,17 @@ public final class CommandableUpdateChecker {
 
 	private void writeHash(DragonAPIMod mod, UpdateHash uh) {
 		File f = this.getHashFile();
-		ArrayList<String> data = ReikaFileReader.getFileAsLines(f, true);
+		List<String> data = ReikaFileReader.getFileAsLines(f, true, Charsets.UTF_8);
 		String tag = mod.getDisplayName()+"=";
 		data.add(tag+uh.toString());
-		try {
-			BufferedReader r = new BufferedReader(new FileReader(f));
+		try(BufferedReader r = new BufferedReader(new FileReader(f)); FileOutputStream os = new FileOutputStream(f)) {
 			String sep = System.getProperty("line.separator");
 			String line = r.readLine();
 			StringBuilder out = new StringBuilder();
 			for (String l : data) {
 				out.append(l+sep);
 			}
-			r.close();
-			FileOutputStream os = new FileOutputStream(f);
 			os.write(out.toString().getBytes());
-			os.close();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -360,12 +378,17 @@ public final class CommandableUpdateChecker {
 
 	@SideOnly(Side.CLIENT)
 	public void onClientReceiveOldModID(String s) {
-		Collection<DragonAPIMod> c = s.startsWith("URL_") ? dispatchedURLMods : dispatchedOldMods;
-		if (s.startsWith("URL_"))
+		if (s.startsWith("URL_")) {
 			s = s.substring(4);
-		DragonAPIMod mod = modNames.get(s);
-		if (!c.contains(mod))
-			c.add(mod);
+			String[] parts = s.split("::");
+			DragonAPIMod mod = modNames.get(parts[0]);
+			erroredMods.put(mod, parts[1]);
+		}
+		else {
+			DragonAPIMod mod = modNames.get(s);
+			if (!dispatchedOldMods.contains(mod))
+				dispatchedOldMods.add(mod);
+		}
 	}
 
 	@SubscribeEvent
@@ -383,10 +406,14 @@ public final class CommandableUpdateChecker {
 				sb.append(" as soon as possible.");
 				li.add(sb.toString());
 			}
-			for (DragonAPIMod mod : dispatchedURLMods) {
+			for (Entry<DragonAPIMod, String> e : erroredMods.entrySet()) {
 				StringBuilder sb = new StringBuilder();
+				DragonAPIMod mod = e.getKey();
 				sb.append(mod.getDisplayName());
-				sb.append(" could not verify its version; the version server may be inaccessible. Check your internet settings, and please notify ");
+				String err = e.getValue();
+				if (Strings.isNullOrEmpty(err))
+					err = "The version server may be inaccessible";
+				sb.append(" could not verify its version; "+err+". Check your internet settings, and please notify ");
 				sb.append(mod.getModAuthorName());
 				sb.append(" if the server is not accessible.");
 				li.add(sb.toString());
@@ -480,9 +507,9 @@ public final class CommandableUpdateChecker {
 			checkURL = url;
 		}
 
-		private ModVersion getLatestVersion() {
+		private ModVersion fetchLatestVersion() {
 			try {
-				ArrayList<String> lines = ReikaFileReader.getFileAsLines(checkURL, 10000, false, this, this);
+				List<String> lines = ReikaFileReader.getFileAsLines(checkURL, 10000, false, this, this);
 				if (lines == null || lines.isEmpty())
 					throw new VersionNotLoadableException("File was empty or null");
 				String name = ReikaStringParser.stripSpaces(mod.getDisplayName().toLowerCase(Locale.ENGLISH));
@@ -495,7 +522,8 @@ public final class CommandableUpdateChecker {
 				}
 			}
 			catch (VersionNotLoadableException e) {
-				return ModVersion.timeout;
+				this.logError(e);
+				return new ErroredVersion(e);
 			}
 			catch (Exception e) {
 				this.logError(e);
@@ -528,6 +556,11 @@ public final class CommandableUpdateChecker {
 		@Override
 		public void onServerNotFound() {
 			throw new VersionNotLoadableException("Version server not found!");
+		}
+
+		@Override
+		public void onCertificateFailed() {
+			throw new VersionNotLoadableException("Version server could not be contacted: HTTPS certificate issues");
 		}
 
 		@Override

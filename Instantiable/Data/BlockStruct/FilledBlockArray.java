@@ -261,7 +261,7 @@ public class FilledBlockArray extends StructuredBlockArray {
 			BlockCheck bk = this.getBlockKey(x, y, z);
 			if (!bk.matchInWorld(world, x, y, z)) {
 				if (logMismatches)
-					ReikaJavaLibrary.pConsole(x+","+y+","+z+" > Wanted ["+bk.getClass().getSimpleName()+"] "+bk.asBlockKey().blockID.getLocalizedName()+":"+bk.asBlockKey().metadata+", found "+world.getBlock(x, y, z).getLocalizedName()+":"+world.getBlockMetadata(x, y, z));
+					ReikaJavaLibrary.pConsole(x+","+y+","+z+" > Wanted ["+bk.getClass().getSimpleName()+"] "+bk.asBlockKey().blockID.getLocalizedName()+":"+bk.asBlockKey().metadata+", found "+world.getBlock(x, y, z).getLocalizedName()+"["+world.getBlock(x, y, z)+"]:"+world.getBlockMetadata(x, y, z));
 				//bk.place(world, x, y, z, 3);
 				//world.setBlock(x, y, z, Blocks.brick_block);
 				if (call != null)
@@ -339,9 +339,15 @@ public class FilledBlockArray extends StructuredBlockArray {
 	}
 
 	public ItemHashMap<Integer> tally() {
+		return this.tally(null);
+	}
+
+	public ItemHashMap<Integer> tally(Function<Coordinate, Boolean> validity) {
 		ItemHashMap<Integer> map = new ItemHashMap();
-		for (BlockCheck bc : data.values()) {
-			ItemStack key = bc.asItemStack();
+		for (Entry<Coordinate, BlockCheck> e : data.entrySet()) {
+			if (validity != null && !validity.apply(e.getKey()))
+				continue;
+			ItemStack key = e.getValue().asItemStack();
 			if (this.count(key)) {
 				if (Block.getBlockFromItem(key.getItem()) instanceof BlockStairs)
 					key.setItemDamage(0);

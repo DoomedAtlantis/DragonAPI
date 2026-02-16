@@ -98,8 +98,12 @@ public class StructureRenderer {
 	}
 
 	public StructureRenderer(FilledBlockArray structure, HashSet<Coordinate> alpha) {
+		this(structure, alpha, null);
+	}
+
+	public StructureRenderer(FilledBlockArray structure, HashSet<Coordinate> alpha, HashMap<Coordinate, BiomeGenBase> biomes) {
 		array = structure;
-		access = new RenderAccess(array, alpha);
+		access = new RenderAccess(array, alpha, biomes);
 		renderer = new RenderBlocks(access);
 		this.reset();
 	}
@@ -127,6 +131,10 @@ public class StructureRenderer {
 
 	public void resetStepY() {
 		secY = 0;
+	}
+
+	public void setSlice(int slice) {
+		secY = Math.min(slice, array.getSizeY()-1);
 	}
 
 	public void incrementStepY() {
@@ -169,7 +177,7 @@ public class StructureRenderer {
 		ItemStack is = array.getDisplayAt(pos.xCoord, pos.yCoord, pos.zCoord);
 		BlockChoiceHook call = overrides.get(pos);
 		if (call != null) {
-			is = call.getBlock(pos);
+			is = call.getBlock(pos, is);
 		}
 		if (is != null && is.getItem() != null) {
 			ItemStack over = itemOverrides.get(is);
@@ -181,7 +189,7 @@ public class StructureRenderer {
 			if (b != null) {
 				BlockChoiceHook bc = choiceHooks.get(b);
 				if (bc != null) {
-					is = bc.getBlock(pos);
+					is = bc.getBlock(pos, is);
 				}
 			}
 		}
@@ -191,19 +199,24 @@ public class StructureRenderer {
 	private BlockKey getRenderBlock(Coordinate pos, BlockKey is) {
 		BlockChoiceHook over = overrides.get(pos);
 		if (over != null) {
-			ItemStack at = over.getBlock(pos);
+			ItemStack at = over.getBlock(pos, is == null ? null : is.asItemStack());
 			is = at != null ? BlockKey.fromItem(at) : null;
 		}
 		if (is != null && is.blockID != null) {
 			BlockChoiceHook bc = choiceHooks.get(is.blockID);
 			if (bc != null) {
-				is = BlockKey.fromItem(bc.getBlock(pos));
+				ItemStack at = bc.getBlock(pos, is.asItemStack());
+				is = at != null ? BlockKey.fromItem(at) : null;
 			}
 		}
 		return is;
 	}
 
 	public void drawSlice(int j, int k, FontRenderer fr) {
+		this.drawSlice(j, k, fr, 1);
+	}
+
+	public void drawSlice(int j, int k, FontRenderer fr, double scale) {
 		double s = 1;
 		int max = Math.max(array.getSizeX(), array.getSizeZ());
 		double dd = max > 16 ? Math.max(12, 28-max) : 14;
@@ -220,13 +233,21 @@ public class StructureRenderer {
 			for (int z = array.getMinZ(); z <= array.getMaxZ(); z++) {
 				ItemStack is = this.getRenderStack(new Coordinate(x, y, z));
 				if (is != null && is.getItem() != null) {
-					double dx = (x-array.getMidX())*dd;
-					double dz = (z-array.getMidZ())*dd;
-					ReikaGuiAPI.instance.drawItemStackWithTooltip(itemRender, fr, is, (int)((j+dx+ox)/s), (int)((k+dz+oy)/s));
+					double dx = (x-array.getMidX())*dd*scale;
+					double dz = (z-array.getMidZ())*dd*scale;
+					GL11.glPushMatrix();
+					GL11.glTranslated((j+dx+ox)/s, (k+dz+oy)/s, 0);
+					GL11.glScaled(scale, scale, scale);
+					ReikaGuiAPI.instance.drawItemStackWithTooltip(itemRender, fr, is, 0, 0);
+					GL11.glPopMatrix();
 				}
 			}
 		}
 		GL11.glPopMatrix();
+	}
+
+	public int getCurrentSlice() {
+		return secY;
 	}
 	/*
 	public void draw3D(int j, int k) {
@@ -317,6 +338,10 @@ public class StructureRenderer {
 	}
 	 */
 	public void draw3D(int j, int k, float ptick, boolean transl) {
+		this.draw3D(j, k, ptick, transl, 1);
+	}
+
+	public void draw3D(int j, int k, float ptick, boolean transl, double scale) {
 
 		if (array.isEmpty())
 			return;
@@ -331,9 +356,9 @@ public class StructureRenderer {
 		//GL11.glFrontFace(GL11.GL_CW);
 
 		if (transl) {
-			int sc = ReikaRenderHelper.getGUIScale();
+			double sc = ReikaRenderHelper.getGUIScale()*scale;
 			GuiScreen scr = Minecraft.getMinecraft().currentScreen;
-			GL11.glTranslated(j*0+scr.width/2D+16/sc, k*0+scr.height/2D+16/sc, 256);
+			GL11.glTranslated(j+scr.width/2D+16/sc, k+scr.height/2D+16/sc, 256);
 
 			double s = 12;
 
@@ -376,7 +401,7 @@ public class StructureRenderer {
 			GL11.glTranslated(-dr, -dr, -dr);
 			//GL11.glTranslated(-drx, -dry, -drz);
 
-			GL11.glScaled(-d*s, -d*s, -d*s);
+			GL11.glScaled(-d*s*scale, -d*s*scale, -d*s*scale);
 		}
 
 		//GL11.glTranslated(-array.getMinX(), -array.getMinY(), -array.getMinZ());
@@ -510,14 +535,18 @@ public class StructureRenderer {
 		protected final Coordinate negativeCorner;
 		protected final Coordinate offset;
 
+		private final HashMap<Coordinate, BiomeGenBase> biomeCoords;
+
 		private boolean hasAnyAlpha = false;
 
-		private RenderAccess(FilledBlockArray arr, HashSet<Coordinate> alpha) {
+		private RenderAccess(FilledBlockArray arr, HashSet<Coordinate> alpha, HashMap<Coordinate, BiomeGenBase> biomes) {
 			offset = new Coordinate(-arr.getMidX(), -arr.getMidY(), -arr.getMidZ());
 			arr.offset(offset.xCoord, offset.yCoord, offset.zCoord);
 
 			data = new PositionData[arr.getSizeX()][arr.getSizeY()][arr.getSizeZ()];
 			negativeCorner = new Coordinate(arr.getMinX(), arr.getMinY(), arr.getMinZ());
+
+			biomeCoords = biomes;
 
 			int axo = Integer.MAX_VALUE;
 			int ayo = Integer.MAX_VALUE;
@@ -605,7 +634,8 @@ public class StructureRenderer {
 		@Override
 		@SideOnly(Side.CLIENT)
 		public BiomeGenBase getBiomeGenForCoords(int x, int z) {
-			return BiomeGenBase.ocean;
+			BiomeGenBase b = biomeCoords == null ? null : biomeCoords.get(new Coordinate(x, 0, z));
+			return b != null ? b : BiomeGenBase.ocean;
 		}
 
 		@Override
@@ -654,7 +684,7 @@ public class StructureRenderer {
 
 	public interface BlockChoiceHook {
 
-		public ItemStack getBlock(Coordinate pos);
+		public ItemStack getBlock(Coordinate pos, ItemStack orig);
 
 	}
 
@@ -667,7 +697,7 @@ public class StructureRenderer {
 		}
 
 		@Override
-		public ItemStack getBlock(Coordinate pos) {
+		public ItemStack getBlock(Coordinate pos, ItemStack orig) {
 			return item;
 		}
 

@@ -10,6 +10,7 @@
 package Reika.DragonAPI.Auxiliary;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
@@ -20,6 +21,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -28,6 +30,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
@@ -76,7 +79,6 @@ import Reika.DragonAPI.Extras.WorldAccessHooks;
 import Reika.DragonAPI.IO.DirectResourceManager;
 import Reika.DragonAPI.Instantiable.Interpolation;
 import Reika.DragonAPI.Instantiable.Event.AddRecipeEvent;
-import Reika.DragonAPI.Instantiable.Event.AddSmeltingEvent;
 import Reika.DragonAPI.Instantiable.Event.FireChanceEvent;
 import Reika.DragonAPI.Instantiable.Event.ItemUpdateEvent;
 import Reika.DragonAPI.Instantiable.Event.MobTargetingEvent;
@@ -89,6 +91,7 @@ import Reika.DragonAPI.Instantiable.Event.Client.EntityRenderingLoopEvent;
 import Reika.DragonAPI.Instantiable.Event.Client.GameFinishedLoadingEvent;
 import Reika.DragonAPI.Instantiable.Event.Client.HotbarKeyEvent;
 import Reika.DragonAPI.Instantiable.Event.Client.RenderBlockAtPosEvent;
+import Reika.DragonAPI.Instantiable.Event.Client.RenderBlockAtPosEvent.BlockRenderWatcher;
 import Reika.DragonAPI.Instantiable.Event.Client.SettingsEvent;
 import Reika.DragonAPI.Instantiable.Event.Client.SinglePlayerLogoutEvent;
 import Reika.DragonAPI.Instantiable.Event.Client.SkyColorEvent;
@@ -136,7 +139,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import paulscode.sound.SoundSystemConfig;
 import thaumcraft.api.wands.ItemFocusBasic;
 
-public class DragonAPIEventWatcher implements ProfileEventWatcher {
+public class DragonAPIEventWatcher implements ProfileEventWatcher, BlockRenderWatcher {
 
 	public static final DragonAPIEventWatcher instance = new DragonAPIEventWatcher();
 
@@ -144,8 +147,12 @@ public class DragonAPIEventWatcher implements ProfileEventWatcher {
 
 	private final Interpolation biomeHumidityFlammability = new Interpolation(false);
 
+	private final HashSet<String> oreDictLogSpamReductionStrings = new HashSet();
+	private Item lastOredictedItem;
+
 	private DragonAPIEventWatcher() {
 		ProfileEvent.registerHandler("debug", this);
+		RenderBlockAtPosEvent.addListener(this);
 
 		biomeHumidityFlammability.addPoint(0, 3);
 		biomeHumidityFlammability.addPoint(0.1, 2);
@@ -180,13 +187,16 @@ public class DragonAPIEventWatcher implements ProfileEventWatcher {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void clearScheduledEvents(SinglePlayerLogoutEvent evt) {
-		TickScheduler.instance.clear();
-		if (ModList.MYSTCRAFT.isLoaded())
-			ReikaMystcraftHelper.clearCache();
+		this.clearCaches();
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void clearScheduledEvents(ClientDisconnectionFromServerEvent evt) {
+		this.clearCaches();
+	}
+
+	public void clearCaches() {
+		ReikaWorldHelper.clearWorldKeyCache();
 		TickScheduler.instance.clear();
 		if (ModList.MYSTCRAFT.isLoaded())
 			ReikaMystcraftHelper.clearCache();
@@ -210,17 +220,18 @@ public class DragonAPIEventWatcher implements ProfileEventWatcher {
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public void renderSubmergeable(RenderBlockAtPosEvent evt) {
-		if (evt.block instanceof Submergeable) {
-			Submergeable s = (Submergeable)evt.block;
-			int meta = evt.getMetadata();
-			if (s.isSubmergeable(evt.access, evt.xCoord, evt.yCoord, evt.zCoord) && s.renderLiquid(meta)) {
-				if (evt.renderPass == 1)
-					this.renderWaterInBlock(evt.access, evt.xCoord, evt.yCoord, evt.zCoord, evt.block, meta, Tessellator.instance);
+	public boolean onBlockTriedRender(Block block, int x, int y, int z, WorldRenderer wr, RenderBlocks rb, int pass) {
+		if (block instanceof Submergeable) {
+			Submergeable s = (Submergeable)block;
+			int meta = rb.blockAccess.getBlockMetadata(x, y, z);
+			if (s.isSubmergeable(rb.blockAccess, x, y, z) && s.renderLiquid(meta)) {
+				if (pass == 1)
+					this.renderWaterInBlock(rb.blockAccess, x, y, z, block, meta, Tessellator.instance);
 			}
 		}
+		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -484,10 +495,15 @@ public class DragonAPIEventWatcher implements ProfileEventWatcher {
 		else if (evt.Name == null || evt.Name.isEmpty())
 			throw new WTFException("Someone registered "+evt.Ore+" under a null or empty OreDict name!", true);
 		else {
-			if (evt.Name.equals("transdimBlock") && evt.Ore.getItemDamage() > 0) { //prevent 4k lines from ender chests
-				return;
+			if (!oreDictLogSpamReductionStrings.contains(evt.Name)) {
+				DragonAPICore.log("Logged OreDict registration of "+evt.Ore+" as '"+evt.Name+"'.");
+				oreDictLogSpamReductionStrings.add(evt.Name);
 			}
-			DragonAPICore.log("Logged OreDict registration of "+evt.Ore+" as '"+evt.Name+"'.");
+			Item i = evt.Ore.getItem();
+			if (i != lastOredictedItem) {
+				oreDictLogSpamReductionStrings.clear();
+				lastOredictedItem = i;
+			}
 		}
 	}
 
@@ -658,7 +674,7 @@ public class DragonAPIEventWatcher implements ProfileEventWatcher {
 			}
 		}
 	}
-
+	/*
 	@SubscribeEvent
 	public void verifySmeltingRecipe(AddSmeltingEvent evt) {
 		if (!evt.isVanillaPass) {
@@ -691,7 +707,7 @@ public class DragonAPIEventWatcher implements ProfileEventWatcher {
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 	/*
 	@SubscribeEvent
 	public void addGuideGUI(PlayerInteractEvent evt) {
@@ -730,6 +746,11 @@ public class DragonAPIEventWatcher implements ProfileEventWatcher {
 				}
 			}
 		}
+	}
+
+	@Override
+	public int watcherSortIndex() {
+		return Integer.MAX_VALUE;
 	}
 
 }

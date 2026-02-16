@@ -9,12 +9,10 @@
  ******************************************************************************/
 package Reika.DragonAPI.Libraries.Java;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -24,8 +22,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,7 +35,10 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
+import org.apache.commons.codec.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 import org.objectweb.asm.ClassReader;
@@ -51,6 +54,7 @@ import net.minecraft.world.World;
 import Reika.DragonAPI.DragonAPICore;
 import Reika.DragonAPI.ModList;
 import Reika.DragonAPI.Exception.MisuseException;
+import Reika.DragonAPI.IO.ReikaFileReader;
 import Reika.DragonAPI.Libraries.MathSci.ReikaMathLibrary;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -73,6 +77,15 @@ public final class ReikaJavaLibrary extends DragonAPICore {
 			'\u039b', '\u03a0', '\u03a3', '\u03a6', '\u03a8', '\u03a9', '\u0414', '\u0416', '\u0418', '\u0428', '\u042c', '\u042d', '\u042e', '\u042f',
 			'\u05d0', '\u05d1', '\u05d2', '\u05d3', '\u05d4', '\u05d7', '\u05d8', '\u05da', '\u05db', '\u05dc', '\u05dd', '\u05de', '\u05e1', '\u05e2',
 			'\u05e3', '\u05e4', '\u05e6', '\u05e7', '\u05e8', '\u05e9', '\u05ea'
+	};
+
+	public static final Comparator<Comparable> reverseComparator = new Comparator<Comparable>() {
+
+		@Override
+		public int compare(Comparable o1, Comparable o2) {
+			return o2.compareTo(o1);
+		}
+
 	};
 
 	/** Generic write-to-console function. Args: Object */
@@ -290,7 +303,7 @@ public final class ReikaJavaLibrary extends DragonAPICore {
 	}
 
 	/** Initializes a class. */
-	public static void initClass(Class c) {
+	public static void initClass(Class c, boolean errorIfFail) {
 		if (printClasses)
 			printClassMetadata(c);
 		if (c == null) {
@@ -299,9 +312,12 @@ public final class ReikaJavaLibrary extends DragonAPICore {
 			return;
 		}
 		try {
-			Class.forName(c.getName(), true, ReikaJavaLibrary.class.getClassLoader());
+			pConsole("DRAGONAPI: Initializing class "+c.getName()+" on classloader "+Thread.currentThread().getContextClassLoader());
+			Class.forName(c.getName());
 		}
 		catch (ClassNotFoundException e) {
+			if (errorIfFail)
+				throw new RuntimeException(e);
 			pConsole("DRAGONAPI: Failed to initalize class "+c.getName()+"! Class not found!");
 			e.printStackTrace();
 			printClassMetadata(c);
@@ -361,115 +377,114 @@ public final class ReikaJavaLibrary extends DragonAPICore {
 
 	public static void printClassMetadata(String path, Class c) {
 		String filename = "FailedClasses/"+path+".classdata";
-		try {
-			File f = new File(filename);
-			f.getParentFile().mkdirs();
-			f.createNewFile();
-			BufferedWriter p = new BufferedWriter(new PrintWriter(f));
-			printClassMetadata(p, c);
-			p.close();
-		}
-		catch (IOException e) {
+		File f = new File(filename);
+		f.getParentFile().mkdirs();
+		if (!printClassMetadata(f, c)) {
 			pConsole("DRAGONAPI: Error printing class data!");
-			e.printStackTrace();
 		}
 	}
 
-	private static void printClassMetadata(BufferedWriter p, Class c) throws IOException {
+	private static boolean printClassMetadata(File f, Class c) {
+		ArrayList<String> li = new ArrayList();
+		printClassMetadata(li, c);
+		return ReikaFileReader.writeLinesToFile(f, li, true, Charsets.UTF_8);
+	}
+
+	private static void printClassMetadata(ArrayList<String> li, Class c) {
 		try {
-			p.write("General:\n");
-			p.write("\t"+c.getName()+"\n");
-			p.write("\tAnnotations: "+Arrays.toString(c.getAnnotations())+"\n");
-			p.write("\tModifiers: "+parseModifiers(c.getModifiers())+"\n");
-			p.write("\tSuperclass: "+c.getSuperclass()+"\n");
-			p.write("\tInterfaces: "+Arrays.toString(c.getInterfaces())+"\n");
-			p.write("\tSynthetic: "+c.isSynthetic()+"\n");
-			p.write("\n\n");
+			li.add("General:");
+			li.add("\t"+c.getName());
+			li.add("\tAnnotations: "+Arrays.toString(c.getAnnotations()));
+			li.add("\tModifiers: "+parseModifiers(c.getModifiers()));
+			li.add("\tSuperclass: "+c.getSuperclass());
+			li.add("\tInterfaces: "+Arrays.toString(c.getInterfaces()));
+			li.add("\tSynthetic: "+c.isSynthetic());
+			li.add("");
 		}
 		catch (Throwable t) {
-			p.write("ERRORED ROOT DATA\n");
+			li.add("ERRORED ROOT DATA");
 			t.printStackTrace();
 		}
 
 		try {
-			p.write("Internal Classes:\n");
+			li.add("Internal Classes:");
 			for (Class cs : c.getDeclaredClasses()) {
 				try {
-					p.write("-------------------------\n");
-					printClassMetadata(p, cs);
-					p.write("-------------------------\n");
+					li.add("-------------------------");
+					printClassMetadata(li, cs);
+					li.add("-------------------------");
 				}
 				catch (Throwable t) {
-					p.write("ERRORED INTERNAL CLASS\n");
+					li.add("ERRORED INTERNAL CLASS");
 					t.printStackTrace();
 				}
 			}
-			p.write("\n\n");
+			li.add("");
 		}
 		catch (Throwable t) {
 			t.printStackTrace();
 		}
 
 		try {
-			p.write("Constructors:\n");
+			li.add("Constructors:");
 			for (Constructor cs : c.getDeclaredConstructors()) {
 				try {
-					p.write("\t\tAnnotations: "+Arrays.toString(cs.getAnnotations())+"\n");
-					p.write("\t\tModifiers: "+parseModifiers(cs.getModifiers())+"\n");
-					p.write("\t\tSignature: "+Arrays.toString(cs.getParameterTypes())+"\n");
-					p.write("\t\tExceptions: "+Arrays.toString(cs.getExceptionTypes())+"\n");
-					p.write("\t\tSynthetic: "+cs.isSynthetic()+"\n\n");
+					li.add("\t\tAnnotations: "+Arrays.toString(cs.getAnnotations()));
+					li.add("\t\tModifiers: "+parseModifiers(cs.getModifiers()));
+					li.add("\t\tSignature: "+Arrays.toString(cs.getParameterTypes()));
+					li.add("\t\tExceptions: "+Arrays.toString(cs.getExceptionTypes()));
+					li.add("\t\tSynthetic: "+cs.isSynthetic()+"");
 				}
 				catch (Throwable t) {
-					p.write("ERRORED CONSTRUCTOR\n");
+					li.add("ERRORED CONSTRUCTOR");
 					t.printStackTrace();
 				}
 			}
-			p.write("\n\n");
+			li.add("");
 		}
 		catch (Throwable t) {
 			t.printStackTrace();
 		}
 
 		try {
-			p.write("Fields:\n");
+			li.add("Fields:");
 			for (Field fd : c.getDeclaredFields()) {
 				try {
-					p.write("\t"+fd.getName()+"\n");
-					p.write("\t\tAnnotations: "+Arrays.toString(fd.getAnnotations())+"\n");
-					p.write("\t\tModifiers: "+parseModifiers(fd.getModifiers())+"\n");
-					p.write("\t\tType: "+fd.getType()+"\n");
-					p.write("\t\tSynthetic: "+fd.isSynthetic()+"\n\n");
+					li.add("\t"+fd.getName());
+					li.add("\t\tAnnotations: "+Arrays.toString(fd.getAnnotations()));
+					li.add("\t\tModifiers: "+parseModifiers(fd.getModifiers()));
+					li.add("\t\tType: "+fd.getType());
+					li.add("\t\tSynthetic: "+fd.isSynthetic()+"");
 				}
 				catch (Throwable t) {
-					p.write("ERRORED FIELD\n");
+					li.add("ERRORED FIELD");
 					t.printStackTrace();
 				}
 			}
-			p.write("\n\n");
+			li.add("");
 		}
 		catch (Throwable t) {
 			t.printStackTrace();
 		}
 
 		try {
-			p.write("Methods:\n");
+			li.add("Methods:");
 			for (Method m : c.getDeclaredMethods()) {
 				try {
-					p.write("\t"+m.getName()+"\n");
-					p.write("\t\tAnnotations: "+Arrays.toString(m.getAnnotations())+"\n");
-					p.write("\t\tModifiers: "+parseModifiers(m.getModifiers())+"\n");
-					p.write("\t\tSignature: "+Arrays.toString(m.getParameterTypes())+"\n");
-					p.write("\t\tExceptions: "+Arrays.toString(m.getExceptionTypes())+"\n");
-					p.write("\t\tReturn: "+m.getReturnType()+"\n");
-					p.write("\t\tSynthetic: "+m.isSynthetic()+"\n\n");
+					li.add("\t"+m.getName());
+					li.add("\t\tAnnotations: "+Arrays.toString(m.getAnnotations()));
+					li.add("\t\tModifiers: "+parseModifiers(m.getModifiers()));
+					li.add("\t\tSignature: "+Arrays.toString(m.getParameterTypes()));
+					li.add("\t\tExceptions: "+Arrays.toString(m.getExceptionTypes()));
+					li.add("\t\tReturn: "+m.getReturnType());
+					li.add("\t\tSynthetic: "+m.isSynthetic()+"");
 				}
 				catch (Throwable t) {
-					p.write("ERRORED METHOD\n");
+					li.add("ERRORED METHOD");
 					t.printStackTrace();
 				}
 			}
-			p.write("\n\n");
+			li.add("");
 		}
 		catch (Throwable t) {
 			t.printStackTrace();
@@ -486,30 +501,22 @@ public final class ReikaJavaLibrary extends DragonAPICore {
 		return params.toString();
 	}
 
-	public static void printClassASM(String path, byte[] data) {
+	public static boolean printClassASM(String path, byte[] data) {
 		ClassReader reader = new ClassReader(data);
 		ClassNode classNode = new ClassNode();
 		reader.accept(classNode,0);
 		final List<MethodNode> methods = classNode.methods;
 		String filename = path+".asm";
-		try {
-			File f = new File(filename);
-			f.createNewFile();
-			BufferedWriter p = new BufferedWriter(new PrintWriter(f));
-			for (MethodNode m : methods) {
-				InsnList inList = m.instructions;
-				p.write(m.name);
-				for (int i = 0; i < inList.size(); i++){
-					p.write(ReikaASMHelper.clearString(inList.get(i)));
-				}
+		File f = new File(filename);
+		ArrayList<String> p = new ArrayList();
+		for (MethodNode m : methods) {
+			InsnList inList = m.instructions;
+			p.add(m.name);
+			for (int i = 0; i < inList.size(); i++){
+				p.add(ReikaASMHelper.clearString(inList.get(i)));
 			}
-
-			p.close();
 		}
-		catch (IOException e) {
-			pConsole("DRAGONAPI: Error printing class ASM!");
-			e.printStackTrace();
-		}
+		return ReikaFileReader.writeLinesToFile(f, p, true, Charsets.UTF_8);
 	}
 
 	public static void printClassSource(String path, byte[] data) {
@@ -547,10 +554,8 @@ public final class ReikaJavaLibrary extends DragonAPICore {
 		data = out.toByteArray() */
 
 		String filename = path+".class";
-		try {
-			FileOutputStream fos = new FileOutputStream(filename);
+		try(FileOutputStream fos = new FileOutputStream(filename)) {
 			fos.write(data);
-			fos.close();
 		}
 		catch (IOException e) {
 			pConsole("DRAGONAPI: Error printing class!");
@@ -558,10 +563,10 @@ public final class ReikaJavaLibrary extends DragonAPICore {
 		}
 	}
 
-	public static void initClassWithSubs(Class c) {
-		initClass(c);
+	public static void initClassWithSubs(Class c, boolean errorIfFail) {
+		initClass(c, errorIfFail);
 		for (Class c2 : c.getDeclaredClasses()) {
-			initClass(c2);
+			initClass(c2, errorIfFail);
 		}
 	}
 
@@ -860,15 +865,6 @@ public final class ReikaJavaLibrary extends DragonAPICore {
 		return ret;
 	}
 
-	public static class ReverseComparator implements Comparator<Comparable> {
-
-		@Override
-		public int compare(Comparable o1, Comparable o2) {
-			return o2.compareTo(o1);
-		}
-
-	}
-
 	public static <E> Set<E> getSet(E... elements) {
 		return new HashSet(Arrays.asList(elements));
 	}
@@ -1106,5 +1102,30 @@ public final class ReikaJavaLibrary extends DragonAPICore {
 				sb.append(", ");
 		}
 		return sb.toString();
+	}
+
+	public static <E extends Enum> EnumSet getConditionalEnumSet(Class<E> cl, Predicate<E> filter) {
+		EnumSet set = EnumSet.noneOf(cl);
+		for (E e : cl.getEnumConstants()) {
+			if (filter.test(e))
+				set.add(e);
+		}
+		return set;
+	}
+
+	public static <E> void removeDuplicates(Collection<E> li) {
+		HashSet<E> encountered = new HashSet();
+		Iterator<E> it = li.iterator();
+		while (it.hasNext()) {
+			E e = it.next();
+			if (encountered.contains(e))
+				it.remove();
+			else
+				encountered.add(e);
+		}
+	}
+
+	public static <K> Function<K, Double> createConstFunction(double val) {
+		return (key) -> val;
 	}
 }

@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import com.google.common.base.Charsets;
 
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -28,7 +31,7 @@ public class DynamicRetrogenSettings {
 
 	public static final DynamicRetrogenSettings instance = new DynamicRetrogenSettings();
 
-	private final HashSet<Generator> generators = new HashSet();
+	private final HashMap<String, Generator> generators = new HashMap();
 
 	private DynamicRetrogenSettings() {
 
@@ -36,29 +39,35 @@ public class DynamicRetrogenSettings {
 
 	public void loadConfig() {
 		File f = new File(DragonAPIInit.config.getConfigFolder(), "DragonAPI_Aux_Retrogen.cfg");
+		Set<IWorldGenerator> set = this.getGeneratorList();
+		for (IWorldGenerator gen : set) {
+			String s = this.getEntry(gen);
+			Generator g = this.createGenerator(s, null);
+			generators.put(s, g);
+		}
 		if (f.exists()) {
 			this.readConfig(f);
-			this.apply();
 		}
-		else {
-			try {
+		try {
+			if (!f.exists())
 				f.createNewFile();
-				this.writeConfig(f);
-			}
-			catch (IOException e) {
-				throw new RuntimeException("Could not create config!");
-			}
+			this.writeConfig(f);
 		}
+		catch (IOException e) {
+			throw new RuntimeException("Could not create config!");
+		}
+		this.apply();
 	}
 
 	private void apply() {
-		for (Generator g : generators) {
-			RetroGenController.instance.addRetroGenerator(g, g.weight);
+		for (Generator g : generators.values()) {
+			if (g.weight != null)
+				RetroGenController.instance.addRetroGenerator(g, g.weight.intValue());
 		}
 	}
 
 	private void readConfig(File f) {
-		ArrayList<String> li = ReikaFileReader.getFileAsLines(f, true);
+		List<String> li = ReikaFileReader.getFileAsLines(f, true, Charsets.UTF_8);
 		for (String s : li) {
 			if (s.charAt(0) == '#' || s.startsWith("--") || s.startsWith("//"))
 				continue;
@@ -84,21 +93,20 @@ public class DynamicRetrogenSettings {
 				throw new InstallationException(DragonAPIInit.instance, "Generator '"+parts[0]+"' not found!");
 			}
 			DragonAPICore.log("Registering retrogen for "+gen.identifier);
-			generators.add(gen);
+			generators.put(parts[0], gen);
 		}
 	}
 
 	private void writeConfig(File f) {
 		ArrayList<String> li = new ArrayList();
-		Set<IWorldGenerator> set = this.getGeneratorList();
-		for (IWorldGenerator gen : set) {
-			li.add(this.getEntry(gen)+"=null");
+		for (Generator g : generators.values()) {
+			li.add(g.identifier+"="+g.weight);
 		}
 		Collections.sort(li);
-		ReikaFileReader.writeLinesToFile(f, li, true);
+		ReikaFileReader.writeLinesToFile(f, li, true, Charsets.UTF_8);
 	}
 
-	private Generator createGenerator(String s, int wt) {
+	private Generator createGenerator(String s, Integer wt) {
 		Set<IWorldGenerator> set = this.getGeneratorList();
 		for (IWorldGenerator gen : set) {
 			String look = this.getEntry(gen);
@@ -132,10 +140,10 @@ public class DynamicRetrogenSettings {
 	private static class Generator implements RetroactiveGenerator {
 
 		public final String identifier;
-		public final int weight;
+		public final Integer weight;
 		private final IWorldGenerator generator;
 
-		private Generator(IWorldGenerator gen, String id, int wt) {
+		private Generator(IWorldGenerator gen, String id, Integer wt) {
 			generator = gen;
 			identifier = id;
 			weight = wt;

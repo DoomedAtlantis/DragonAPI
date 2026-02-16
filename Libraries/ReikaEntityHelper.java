@@ -73,6 +73,7 @@ import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -98,6 +99,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -393,6 +395,10 @@ public final class ReikaEntityHelper extends DragonAPICore {
 
 	/** Returns true if the mob is a hostile one. Args: EntityLivingBase mob */
 	public static boolean isHostile(EntityLivingBase mob) {
+		if (mob instanceof EntityIronGolem) {
+			EntityLivingBase tgt = ((EntityIronGolem)mob).getAttackTarget();
+			return tgt instanceof EntityPlayer || (tgt instanceof EntityTameable && ((EntityTameable)tgt).isTamed()) || tgt instanceof TameHostile;
+		}
 		return isHostile(mob.getClass());
 	}
 
@@ -1236,7 +1242,11 @@ public final class ReikaEntityHelper extends DragonAPICore {
 	}
 
 	public static boolean isNearSkylight(Entity e) {
-		return e.worldObj.getSavedLightValue(EnumSkyBlock.Sky, MathHelper.floor_double(e.posX), MathHelper.floor_double(e.posY), MathHelper.floor_double(e.posZ)) > 0;
+		return getSkyLightAt(e) > 0;
+	}
+
+	public static int getSkyLightAt(Entity e) {
+		return e.worldObj.getSavedLightValue(EnumSkyBlock.Sky, MathHelper.floor_double(e.posX), MathHelper.floor_double(e.posY+e.height/2), MathHelper.floor_double(e.posZ));
 	}
 
 	public static boolean isEntityWearingPoweredArmor(EntityLivingBase e) {
@@ -1574,6 +1584,23 @@ public final class ReikaEntityHelper extends DragonAPICore {
 			return (Collection<AttributeModifier>)mai.mapByName.get(n);
 		}
 		return null;
+	}
+
+	public static boolean isInBiome(Entity e, BiomeGenBase b) {
+		return b != null && e.worldObj.getBiomeGenForCoords(MathHelper.floor_double(e.posX), MathHelper.floor_double(e.posZ)) == b;
+	}
+
+	public static int countEntities(World world, IEntitySelector sel) {
+		int c = 0;
+		for (Entity e : ((List<Entity>)world.loadedEntityList)) {
+			if (sel == null || sel.isEntityApplicable(e))
+				c++;
+		}
+		return c;
+	}
+
+	public static boolean isTamed(Entity e) {
+		return e instanceof TameHostile || (e instanceof EntityTameable && ((EntityTameable)e).isTamed());
 	}
 
 }

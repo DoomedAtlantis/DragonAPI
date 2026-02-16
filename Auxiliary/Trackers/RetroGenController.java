@@ -1,8 +1,8 @@
 /*******************************************************************************
  * @author Reika Kalseki
- * 
+ *
  * Copyright 2017
- * 
+ *
  * All rights reserved.
  * Distribution of the software in any form is only allowed with
  * explicit, prior permission from the owner.
@@ -16,7 +16,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import com.google.common.base.Charsets;
 
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
@@ -56,14 +59,13 @@ public class RetroGenController {
 		retrogens.put(e.id, e);
 	}
 
-	public void addHybridGenerator(RetroactiveGenerator gen, int weight, boolean retro) {
+	public void addHybridGenerator(RetroactiveGenerator gen, int weight) {
 		GameRegistry.registerWorldGenerator(gen, weight);
-		if (retro)
-			this.addRetroGenerator(gen, weight);
+		//this.addRetroGenerator(gen, weight);
 	}
 
 	public Set<String> getActiveRetroGenerators() {
-		return Collections.unmodifiableSet(retrogens.keySet());
+		return Collections.unmodifiableSet(/*activeRetrogens.stream().map(r -> r.id).collect(Collectors.toSet())*/retrogens.keySet());
 	}
 
 	public void excludeWorld(int dim) {
@@ -88,8 +90,8 @@ public class RetroGenController {
 		DataCache cache = this.getOrCreateCache(c.worldObj);
 		if (cache == null)
 			return;
-		for (GeneratorEntry e : retrogens.values()) {
-			cache.generatedChunks.addValue(e.id, new ChunkCoordIntPair(c.xPosition, c.zPosition));
+		for (String s : retrogens.keySet()) {
+			cache.generatedChunks.addValue(s, new ChunkCoordIntPair(c.xPosition, c.zPosition));
 		}
 	}
 
@@ -106,9 +108,8 @@ public class RetroGenController {
 		DataCache cache = this.getOrCreateCache(world);
 		ChunkCoordIntPair p = new ChunkCoordIntPair(c.xPosition, c.zPosition);
 		ArrayList<GeneratorEntry> toGen = new ArrayList();
-		for (String s : retrogens.keySet()) {
-			GeneratorEntry e = retrogens.get(s);
-			Collection<ChunkCoordIntPair> exclude = cache.generatedChunks.get(s);
+		for (GeneratorEntry e : retrogens.values()) {
+			Collection<ChunkCoordIntPair> exclude = cache.generatedChunks.get(e.id);
 			if (exclude.contains(p))
 				continue;
 			//ReikaJavaLibrary.pConsole(p);
@@ -144,7 +145,7 @@ public class RetroGenController {
 		//generatedChunks.remove(e.id); DO NOT CLEAR
 		File f = this.getFile(world, e);
 		if (f != null && f.exists()) {
-			ArrayList<String> li = ReikaFileReader.getFileAsLines(f, true);
+			List<String> li = ReikaFileReader.getFileAsLines(f, true, Charsets.UTF_8);
 			for (String s : li) {
 				ChunkCoordIntPair p = this.parseCoordPair(s);
 				cache.generatedChunks.addValue(e.id, p);
@@ -171,7 +172,7 @@ public class RetroGenController {
 		for (ChunkCoordIntPair p : cache.generatedChunks.get(e.id)) {
 			li.add(this.toString(p));
 		}
-		ReikaFileReader.writeLinesToFile(f, li, true);
+		ReikaFileReader.writeLinesToFile(f, li, true, Charsets.UTF_8);
 	}
 
 	private DataCache getOrCreateCache(World world) {
